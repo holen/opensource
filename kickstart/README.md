@@ -29,3 +29,40 @@ linux安装大致可以分为2个阶段
     %pre :预安装脚本        （由于只依赖于启动镜像，支持的命令很少）
     %post:后安装脚本（基本支持所有命令）    
 
+%post
+apt-get update
+mkdir /home/user
+
+#txt.cfg
+
+default autoinstall
+label autoinstall
+menu label ^Install Custom Ubuntu Server
+kernel /install/vmlinuz
+append file=/cdrom/preseed/ubuntu-server.seed
+initrd=/install/initrd.gz quiet
+ks=cdrom:/isolinux/ks.cfg --
+
+label install
+menu label ^Install Ubuntu Server
+kernel /install/vmlinuz
+append file=/cdrom/preseed/ubuntu-server.seed vga=788
+initrd=/install/initrd.gz quiet --
+
+label cloud
+menu label ^Multiple server install with MAAS
+kernel /install/vmlinuz
+append modules=maas-enlist-udeb vga=788 initrd=/install/initrd.gz quiet --
+
+label check
+menu label ^Check disc for defects
+kernel /install/vmlinuz
+append MENU=/bin/cdrom-checker-menu vga=788 initrd=/install/initrd.gz quiet --
+
+label memtest
+menu label Test ^memory
+kernel /install/mt86plus
+
+label hd
+menu label ^Boot from first hard disk
+localboot 0x80 
