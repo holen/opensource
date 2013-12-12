@@ -1,5 +1,6 @@
 # Introduction
-    Fail2ban 会检查日志文件如：/var/log/pwdfail或者/var/log/apache/error.log以及禁止那些多次登入密码错误的IP. 它更新firewall rule去禁用这些IP地址。
+    fail2ban可以监视你的系统日志，然后匹配日志的错误信息（正则式匹配）执行相应的屏蔽动作（一般情况下是调用防火墙屏蔽），
+    如:当有人在试探你的SSH、SMTP、FTP密码，只要达到你预设的次数，fail2ban就会调用防火墙屏蔽这个IP，而且可以发送e-mail通知系统管理员，是一款很实用、很强大的软件！
 
     它的主要功能有：
     支持大量服务。如sshd,apache,qmail,proftpd,sasl等等
@@ -15,13 +16,13 @@
 
 # Usage
 ## Definitions
-    Before we begin, it is important to clarify some terms used in the following sections.
+    fail2ban包含下面5个要素，理解这5个要素之间的关系，对于如何配置如何使用fail2ban是很有帮助的
 
-    filter  :  a filter defines a regular expression which must match a pattern corresponding to a log-in failure or any other expression
-    action  :  an action defines several commands which are executed at different moments
-    jail    :  a jail is a combination of one filter and one or several actions. Fail2ban can handle several jails at the same time
-    server  :  The server listens on a socket and waits for commands. It monitors log files and executes actions.
-    client  :  communicate with the server. It converts the config/ settings into commands which are sent to the server through a Unix socket. 
+    filter（过滤器）：用于在日志文件中找出需要屏蔽信息的正则表达式
+    action（操作指令）：发现需要屏蔽时所做的具体操作
+    jail（组合，一个filter或者多个action）：filter和action的整合
+    fail2ban-client：与fail2ban-server通讯，可以通过它设置server的config文件参数
+    fail2ban-server：监控日志文件和执行action
 
 ## Configuration
     fail2ban默认的配置文件路径是/etc/fail2ban. 我们可以用fail2ban-client -c <dir> 重新指定配置文件
@@ -43,18 +44,20 @@
     maxretry = 3 ## 最大重试次数
     backend = auto #日志修改检测机制（gamin、polling和auto这三种）
     destemail = root@localhost
-    banaction = iptables-multiport ## 默认的屏蔽动作
+    banaction = iptables ## 默认的屏蔽动作
     mta = sendmail
     protocol = tcp
     chain = INPUT
     action_ = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
     [ssh] ## 子段配置，这会覆盖全局设置的参数
-    enabled  = true
+    enabled  = true # 是否激活
     port     = ssh
     filter   = sshd # sshd对应filter.d/sshd.conf文件，在此文件下设置相应的匹配规则
     logpath  = /var/log/auth.log
     maxretry = 2 # 最大重试次数,会覆盖全局配置的maxretry
-    banaction = dummy # dummy对应action.d/dummy.conf文件，在此文件下设置相应的触发动作
+    banaction = iptables[name=ssh,port=22,protocol=tcp]
+                mail[name=SSH,dest=toto@titi.com]
+                # dummy对应action.d/dummy.conf文件，在此文件下设置相应的触发动作
     
     filter.d目录主要包含企图破入和密码失败的正则表达式,
     eg:filter.d/sshd-ddos.conf 
@@ -111,8 +114,27 @@
     chain = INPUT
 
 # Command
+
     $ fail2ban-client -d # We will first test whether the configuration directory can be parse correctly. 
     $ fail2ban-client set loglevel 3
     $ fail2ban-client status 
     $ fail2ban-client status ssh
     $ fail2ban-client -h 
+    $ fail2ban-client reload
+    
+# Test
+    设置jail.conf的ssh服务如下，把banaction指向dummy，dummy是应用action.d/dummy.conf文件，它会记录3次登录失败的IP到/tmp/fail2ban.dummy中。
+
+    [ssh]
+    enabled  = true
+    port     = ssh
+    filter   = sshd
+    logpath  = /var/log/auth.log
+    maxretry = 3
+    banaction = dummy
+   
+    $ ssh ip # 重复运行三次错误的密码  
+
+    $ cat /tmp/fail2ban.dummy 
+    123
+    +10.0.10.101
