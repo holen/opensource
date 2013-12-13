@@ -66,6 +66,6 @@ linux安装大致可以分为2个阶段
 
     cd /data/autoiso/iso/
     mkisofs -r -V "$IMAGE_NAME" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o  /data/autoiso/autoinstall.iso .  
-    # -o參數是指定做好的檔案要放到那個目錄下，這個指令的最後面有一個“.”，太小了，很容易會遺忘它的存在。
+    # -o参数是指定做好的iso放置的目录，这个指令的最后面有一个個“.”，太小了，很容易会遗忘它的存在。
     mkisofs完后，/data/autoiso/下会多个autoinstall.iso文件，现在就可以使用autoinstall.iso镜像进行自动化安装
     使用该镜像安装ubuntu系统，在开机界面选择Auto install系统就会自动安装完成
