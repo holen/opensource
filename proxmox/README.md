@@ -36,9 +36,10 @@ must power off the node to be removed
 ## Restore the removed node
 * reinstall pve
 * add this node as a new node
->hp1# pvecm add hp2-IP  
->hp1# pvecm status  
->hp1# pvecm nodes  
+
+    hp1# pvecm add hp2-IP  
+    hp1# pvecm status  
+    hp1# pvecm nodes  
 
 ## Re-install a cluster node
 Move all virtual machines off the node.
