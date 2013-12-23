@@ -16,7 +16,7 @@ Add a node:
 
     hp2# pvecm add IP-ADDRESS-CLUSTER
 
-For IP-ADDRESS-CLUSTER use an IP from an existing cluster node(as hp1). 
+For IP-ADDRESS-CLUSTER use an IP from an existing cluster node(as hp1-hostname). 
 
 To check the state of cluster:
 
@@ -31,7 +31,7 @@ List nodes:
     
 must power off the node to be removed 
 
-    hp2# pvecm delnode hp1
+    hp2# pvecm delnode hp1-hostname
 
 ## Restore the removed node
 * reinstall pve
