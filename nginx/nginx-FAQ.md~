@@ -99,24 +99,3 @@ add follow to `server`
 
     LogFormat  "%{Cdn-Src-Ip}i" cdnsrcip                                           
     CustomLog ${APACHE_LOG_DIR}/access.log cdnsrcip 
-
-    %a - Remote IP address
-    %A - Local IP address
-    %b - Bytes sent, excluding HTTP headers, or '-' if no bytes were sent
-    %B - Bytes sent, excluding HTTP headers
-    %h - Remote host name
-    %H - Request protocol
-    %l - Remote logical username from identd (always returns '-')
-    %m - Request method
-    %p - Local port
-    %q - Query string (prepended with a '?' if it exists, otherwise an empty string
-    %r - First line of the request
-    %s - HTTP status code of the response
-    %S - User session ID
-    %t - Date and time, in Common Log Format format
-    %u - Remote user that was authenticated
-    %U - Requested URL path
-    %v - Local server name
-    %D - Time taken to process the request, in millis
-    %T - Time taken to process the request, in seconds
-    %I - current Request thread name (can compare later with stacktraces) 
