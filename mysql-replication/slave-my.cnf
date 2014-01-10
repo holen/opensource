@@ -1,0 +1,61 @@
+[client]
+port		= 3306
+socket		= /var/run/mysqld/mysqld.sock
+
+[mysqld_safe]
+socket		= /var/run/mysqld/mysqld.sock
+nice		= 0
+
+[mysqld]
+#############
+# slave
+server-id	= 101 
+binlog-format	= mixed
+log_bin		= mysql-bin
+relay-log	= mysql-relay-bin
+log-slave-updates = 1
+read-only	= 1
+replicate-ignore-db	= mysql
+replicate-ignore-db	= performance_schema
+replicate-ignore-db	= information_schema
+#############
+open_files_limit = 1000000
+skip-external-locking
+skip-name-resolve
+user		= mysql
+pid-file	= /var/run/mysqld/mysqld.pid
+socket		= /var/run/mysqld/mysqld.sock
+port		= 3306
+basedir		= /usr
+datadir		= /data/mysql
+tmpdir		= /data/mysql-tmp
+log_error	= /data/mysql-log/error.log
+slow_query_log	= 1
+slow_query_log_file	= /data/mysql-log/slow-query.log
+long_query_time		= 2
+log-queries-not-using-indexes
+
+lc-messages-dir	= /usr/share/mysql
+max_error_count = 65535
+bind-address		= 0.0.0.0
+key_buffer		= 16G
+max_allowed_packet	= 128M
+thread_stack		= 192K
+thread_cache_size       = 8
+myisam-recover         = BACKUP
+max_connections        = 1000
+query_cache_limit	= 128M
+query_cache_size        = 128M
+expire_logs_days	= 10
+max_binlog_size         = 100M
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet	= 128M
+
+[mysql]
+
+[isamchk]
+key_buffer		= 16G
+!includedir /etc/mysql/conf.d/
