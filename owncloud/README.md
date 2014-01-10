@@ -49,4 +49,6 @@ Then
 
 [How to Setup OwnCloud Server 5 with SSL Connection](http://ubuntuserverguide.com/2013/04/how-to-setup-owncloud-server-5-with-ssl-connection.html)
     
+## Document
 
+[How To Install OwnCloud 6 On Ubuntu and other system](http://linuxg.net/how-to-install-owncloud-6-on-ubuntu-debian-centos-fedora-opensuse-and-derivates/)
