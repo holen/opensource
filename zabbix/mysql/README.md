@@ -37,6 +37,10 @@ Restart web server
    create a web application
    configuration --> hosts --> create web scenario 
    create action
+
+##  create auto register
+
+    configure --> action --> create auto-register --> add to Linux group --> link to linux template
    
 ## Monitor mysql use zabbix template
 Grant privileges on mysql
