@@ -66,19 +66,16 @@ Create repl user
 Scp mysql data
 
     service mysql stop
-    tar --exclude='1*' -zcvf mysql.tgz mysql 
-    scp mysql.tgz root@10.0.140.42:/data/
+    rsync -av --progress --exclude 'mysql-bin*' /data/mysql root@10.0.0.3:/data/
+    rsync -av --progress --exclude 'mysql-bin*' /data/mysql root@10.0.0.3:/data/
+    rsync -av --progress --exclude --delete 'mysql-bin*' /data/mysql root@10.0.0.3:/data/
 
 ## Mysql slave setting
-Extract mysql data
-
-    tar zxvf mysql.tgz
-    mv mysql /data/
-    
 Sync my.cnf 
 
-    scp root@10.0.140.53:/etc/mysql/my.cnf /etc/mysql/
-    scp root@10.0.140.53:/etc/mysql/my.cnf /etc/mysql/
+    rsync -av --progress --exclude 'mysql-bin*' /data/mysql root@10.0.0.3:/data/
+    rsync -av --progress --exclude 'mysql-bin*' /data/mysql root@10.0.0.3:/data/
+    rsync -av --progress --exclude --delete 'mysql-bin*' /data/mysql root@10.0.0.3:/data/
     
 Modify mysql config --> /etc/mysql/my.cnf
 

@@ -1,0 +1,4271 @@
+<zabbix_export date="11.11.10" time="04.09" version="1.0">
+  <dependencies>
+    <dependency description="Template_MySQL:Slave lag more than 10m over 10m on {HOSTNAME}">
+      <depends>Template_MySQL:Process mysqld not running on {HOSTNAME}</depends>
+    </dependency>
+    <dependency description="Template_MySQL:Slave lag more than 5m over 10m on {HOSTNAME}">
+      <depends>Template_MySQL:Slave lag more than 10m over 10m on {HOSTNAME}</depends>
+      <depends>Template_MySQL:Process mysqld not running on {HOSTNAME}</depends>
+    </dependency>
+    <dependency description="Template_MySQL:Slave is stopped on {HOSTNAME}">
+      <depends>Template_MySQL:Process mysqld not running on {HOSTNAME}</depends>
+    </dependency>
+    <dependency description="Template_MySQL:More than 500 threads on {HOSTNAME}">
+      <depends>Template_MySQL:Process mysqld not running on {HOSTNAME}</depends>
+    </dependency>
+    <dependency description="Template_MySQL:Server {HOSTNAME} is waiting on table locks">
+      <depends>Template_MySQL:Process mysqld not running on {HOSTNAME}</depends>
+    </dependency>
+    <dependency description="Template_MySQL:InnoDB lock structures more than 30 in 5m on {HOSTNAME}">
+      <depends>Template_MySQL:Process mysqld not running on {HOSTNAME}</depends>
+    </dependency>
+    <dependency description="Template_MySQL:InnoDB uncheckpointed bytes in the last 10m &gt; 25MB on {HOSTNAME}">
+      <depends>Template_MySQL:Process mysqld not running on {HOSTNAME}</depends>
+    </dependency>
+  </dependencies>
+  <hosts>
+    <host name="Template_MySQL">
+      <graphs>
+        <graph height="150" name="MyISAM Indexes" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Key_read_requests">
+              <calc_fnc>2</calc_fnc>
+              <color>157419</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Key_reads">
+              <calc_fnc>2</calc_fnc>
+              <color>AFECED</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Key_write_requests">
+              <calc_fnc>2</calc_fnc>
+              <color>862F2F</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Key_writes">
+              <calc_fnc>2</calc_fnc>
+              <color>F51D30</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MyISAM Key Cache" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.setting.key_buffer_size">
+              <calc_fnc>2</calc_fnc>
+              <color>99B898</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Key_buf_bytes_used">
+              <calc_fnc>2</calc_fnc>
+              <color>2A363B</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Key_buf_bytes_unflushed">
+              <calc_fnc>2</calc_fnc>
+              <color>FECEA8</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Buffer Pool" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.setting.pool_size">
+              <calc_fnc>2</calc_fnc>
+              <color>3D1500</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.database_pages">
+              <calc_fnc>2</calc_fnc>
+              <color>EDAA41</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.free_pages">
+              <calc_fnc>2</calc_fnc>
+              <color>AA3B27</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.modified_pages">
+              <calc_fnc>2</calc_fnc>
+              <color>13343B</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB I/O" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.file_reads">
+              <calc_fnc>2</calc_fnc>
+              <color>402204</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.file_writes">
+              <calc_fnc>2</calc_fnc>
+              <color>B3092B</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.log_writes">
+              <calc_fnc>2</calc_fnc>
+              <color>FFBF00</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.file_fsyncs">
+              <calc_fnc>2</calc_fnc>
+              <color>0ABFCC</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Insert Buffer" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.ibuf_inserts">
+              <calc_fnc>2</calc_fnc>
+              <color>157419</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.ibuf_merged">
+              <calc_fnc>2</calc_fnc>
+              <color>0000FF</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.ibuf_merges">
+              <calc_fnc>2</calc_fnc>
+              <color>862F2F</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Insert Buffer Usage" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.ibuf_cell_count">
+              <calc_fnc>2</calc_fnc>
+              <color>793A57</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.ibuf_used_cells">
+              <calc_fnc>2</calc_fnc>
+              <color>8C873E</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.ibuf_free_cells">
+              <calc_fnc>2</calc_fnc>
+              <color>A38A5F</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Semaphores" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.spin_rounds">
+              <calc_fnc>2</calc_fnc>
+              <color>306078</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.spin_waits">
+              <calc_fnc>2</calc_fnc>
+              <color>4444FF</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.os_waits">
+              <calc_fnc>2</calc_fnc>
+              <color>157419</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Row Operations" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.rows_read">
+              <calc_fnc>2</calc_fnc>
+              <color>AFECED</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.rows_deleted">
+              <calc_fnc>2</calc_fnc>
+              <color>DA4725</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.rows_updated">
+              <calc_fnc>2</calc_fnc>
+              <color>EA8F00</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.rows_inserted">
+              <calc_fnc>2</calc_fnc>
+              <color>35962B</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Table Locks" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Table_locks_immediate">
+              <calc_fnc>2</calc_fnc>
+              <color>D2D8F9</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Table_locks_immediate">
+              <calc_fnc>2</calc_fnc>
+              <color>002A8F</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Table_locks_waited">
+              <calc_fnc>2</calc_fnc>
+              <color>FF3932</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Slow_queries">
+              <calc_fnc>2</calc_fnc>
+              <color>35962B</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Connections" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.setting.max_connections">
+              <calc_fnc>2</calc_fnc>
+              <color>C0C0C0</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Max_used_connections">
+              <calc_fnc>2</calc_fnc>
+              <color>FFD660</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Aborted_clients">
+              <calc_fnc>2</calc_fnc>
+              <color>FF3932</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Aborted_connects">
+              <calc_fnc>2</calc_fnc>
+              <color>00FF00</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Threads_connected">
+              <calc_fnc>2</calc_fnc>
+              <color>FF7D00</color>
+              <drawtype>2</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Connections">
+              <calc_fnc>2</calc_fnc>
+              <color>4444FF</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Replication" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.slave_running">
+              <calc_fnc>2</calc_fnc>
+              <color>96E78A</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.slave_stopped">
+              <calc_fnc>2</calc_fnc>
+              <color>CDCFC4</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.slave_lag">
+              <calc_fnc>2</calc_fnc>
+              <color>4444FF</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Slave_open_temp_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>8D00BA</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Slave_retried_transactions">
+              <calc_fnc>2</calc_fnc>
+              <color>FF0000</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Query Cache" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Qcache_queries_in_cache">
+              <calc_fnc>2</calc_fnc>
+              <color>4444FF</color>
+              <drawtype>2</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Qcache_hits">
+              <calc_fnc>2</calc_fnc>
+              <color>EAAF00</color>
+              <drawtype>2</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Qcache_inserts">
+              <calc_fnc>2</calc_fnc>
+              <color>157419</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Qcache_not_cached">
+              <calc_fnc>2</calc_fnc>
+              <color>00A0C1</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Qcache_lowmem_prunes">
+              <calc_fnc>2</calc_fnc>
+              <color>FF0000</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Query Cache Memory" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.setting.query_cache_size">
+              <calc_fnc>2</calc_fnc>
+              <color>74C366</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Qcache_free_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>FFC3C0</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Qcache_total_blocks">
+              <calc_fnc>2</calc_fnc>
+              <color>8D00BA</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Qcache_free_blocks">
+              <calc_fnc>2</calc_fnc>
+              <color>837C04</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Command Counters" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Questions">
+              <calc_fnc>2</calc_fnc>
+              <color>FFC3C0</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_select">
+              <calc_fnc>2</calc_fnc>
+              <color>FF0000</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_delete">
+              <calc_fnc>2</calc_fnc>
+              <color>FF7D00</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_insert">
+              <calc_fnc>2</calc_fnc>
+              <color>FFF200</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_update">
+              <calc_fnc>2</calc_fnc>
+              <color>00CF00</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_replace">
+              <calc_fnc>2</calc_fnc>
+              <color>2175D9</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_load">
+              <calc_fnc>2</calc_fnc>
+              <color>55009D</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_delete_multi">
+              <calc_fnc>2</calc_fnc>
+              <color>942D0C</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_insert_select">
+              <calc_fnc>2</calc_fnc>
+              <color>AAABA1</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_update_multi">
+              <calc_fnc>2</calc_fnc>
+              <color>D8ACE0</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Com_replace_select">
+              <calc_fnc>2</calc_fnc>
+              <color>00B99B</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Select Types" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Select_full_join">
+              <calc_fnc>2</calc_fnc>
+              <color>3D1500</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Select_full_range_join">
+              <calc_fnc>2</calc_fnc>
+              <color>AA3B27</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Select_range">
+              <calc_fnc>2</calc_fnc>
+              <color>EDAA41</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Select_range_check">
+              <calc_fnc>2</calc_fnc>
+              <color>13343B</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Select_scan">
+              <calc_fnc>2</calc_fnc>
+              <color>686240</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Sorts" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Sort_rows">
+              <calc_fnc>2</calc_fnc>
+              <color>FFAB00</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Sort_range">
+              <calc_fnc>2</calc_fnc>
+              <color>157419</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Sort_merge_passes">
+              <calc_fnc>2</calc_fnc>
+              <color>DA4725</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Sort_scan">
+              <calc_fnc>2</calc_fnc>
+              <color>4444FF</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Temporary Objects" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Created_tmp_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>FFAB00</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Created_tmp_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>837C04</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Created_tmp_disk_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>F51D30</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Created_tmp_files">
+              <calc_fnc>2</calc_fnc>
+              <color>157419</color>
+              <drawtype>2</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Network Traffic" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Bytes_sent">
+              <calc_fnc>2</calc_fnc>
+              <color>4B2744</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Bytes_received">
+              <calc_fnc>2</calc_fnc>
+              <color>E4C576</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Buffer Pool Activity" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.pages_created">
+              <calc_fnc>2</calc_fnc>
+              <color>D6883A</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pages_read">
+              <calc_fnc>2</calc_fnc>
+              <color>E6D883</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pages_written">
+              <calc_fnc>2</calc_fnc>
+              <color>55AD84</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB I/O Pending" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.pending_aio_log_ios">
+              <calc_fnc>2</calc_fnc>
+              <color>FF0000</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_aio_sync_ios">
+              <calc_fnc>2</calc_fnc>
+              <color>FF7D00</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_buf_pool_flushes">
+              <calc_fnc>2</calc_fnc>
+              <color>FFF200</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_chkp_writes">
+              <calc_fnc>2</calc_fnc>
+              <color>00A348</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_ibuf_aio_reads">
+              <calc_fnc>2</calc_fnc>
+              <color>6DC8FE</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_log_flushes">
+              <calc_fnc>2</calc_fnc>
+              <color>4444FF</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_log_writes">
+              <calc_fnc>2</calc_fnc>
+              <color>55009D</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_normal_aio_reads">
+              <calc_fnc>2</calc_fnc>
+              <color>B90054</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.pending_normal_aio_writes">
+              <calc_fnc>2</calc_fnc>
+              <color>8F9286</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Log" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.innodb_log_buffer_size">
+              <calc_fnc>2</calc_fnc>
+              <color>6E3803</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.log_bytes_written">
+              <calc_fnc>2</calc_fnc>
+              <color>5B8257</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.log_bytes_flushed">
+              <calc_fnc>2</calc_fnc>
+              <color>AB4253</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.unflushed_log">
+              <calc_fnc>2</calc_fnc>
+              <color>AFECED</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Binary/Relay Logs" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Binlog_cache_use">
+              <calc_fnc>2</calc_fnc>
+              <color>35962B</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Binlog_cache_disk_use">
+              <calc_fnc>2</calc_fnc>
+              <color>FF0000</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.binary_log_space">
+              <calc_fnc>2</calc_fnc>
+              <color>8D00BA</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.relay_log_space">
+              <calc_fnc>2</calc_fnc>
+              <color>8F005C</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Transactions" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.innodb_transactions">
+              <calc_fnc>2</calc_fnc>
+              <color>8F005C</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.current_transactions">
+              <calc_fnc>2</calc_fnc>
+              <color>4444FF</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.history_list">
+              <calc_fnc>2</calc_fnc>
+              <color>FF7D00</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.read_views">
+              <calc_fnc>2</calc_fnc>
+              <color>74C366</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Active/Locked Transactions" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.active_transactions">
+              <calc_fnc>2</calc_fnc>
+              <color>C0C0C0</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.locked_transactions">
+              <calc_fnc>2</calc_fnc>
+              <color>FF0000</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Files and Tables" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.setting.table_cache">
+              <calc_fnc>2</calc_fnc>
+              <color>D09887</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Open_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>4A6959</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Open_files">
+              <calc_fnc>2</calc_fnc>
+              <color>1D1159</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Opened_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>DE0056</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Threads" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.setting.thread_cache_size">
+              <calc_fnc>2</calc_fnc>
+              <color>D8ACE0</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Threads_created">
+              <calc_fnc>2</calc_fnc>
+              <color>DE0056</color>
+              <drawtype>2</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Memory Allocation" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.total_mem_alloc">
+              <calc_fnc>2</calc_fnc>
+              <color>53777A</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.additional_pool_alloc">
+              <calc_fnc>2</calc_fnc>
+              <color>C02942</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Adaptive Hash Index" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.hash_index_cells_total">
+              <calc_fnc>2</calc_fnc>
+              <color>0C4E5D</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.hash_index_cells_used">
+              <calc_fnc>2</calc_fnc>
+              <color>D9C7A3</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Internal Hash Memory Usage" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.adaptive_hash_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>793A57</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.page_hash_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>8C873E</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.dictionary_cache_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>D1C5A5</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.file_system_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>4D3339</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.lock_system_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>A38A5F</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.recovery_system_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>E97F02</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.thread_hash_memory">
+              <calc_fnc>2</calc_fnc>
+              <color>23B0BA</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Tables In Use" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.innodb_tables_in_use">
+              <calc_fnc>2</calc_fnc>
+              <color>D99362</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.innodb_locked_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>663344</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Current Lock Waits" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.innodb_lock_wait_secs">
+              <calc_fnc>2</calc_fnc>
+              <color>201A33</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Lock Structures" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.innodb_lock_structs">
+              <calc_fnc>2</calc_fnc>
+              <color>0C4E5D</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Checkpoint Age" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.uncheckpointed_bytes">
+              <calc_fnc>2</calc_fnc>
+              <color>661100</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Row Lock Time" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Innodb_row_lock_time">
+              <calc_fnc>2</calc_fnc>
+              <color>B11D03</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Row Lock Waits" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Innodb_row_lock_waits">
+              <calc_fnc>2</calc_fnc>
+              <color>E84A5F</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Semaphore Waits" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.innodb_sem_waits">
+              <calc_fnc>2</calc_fnc>
+              <color>7020AF</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="InnoDB Semaphore Wait Time" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.innodb_sem_wait_time_ms">
+              <calc_fnc>2</calc_fnc>
+              <color>708226</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Processlist" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.State_closing_tables">
+              <calc_fnc>2</calc_fnc>
+              <color>DE0056</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_copying_to_tmp_table">
+              <calc_fnc>2</calc_fnc>
+              <color>784890</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_end">
+              <calc_fnc>2</calc_fnc>
+              <color>D1642E</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_freeing_items">
+              <calc_fnc>2</calc_fnc>
+              <color>487860</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_init">
+              <calc_fnc>2</calc_fnc>
+              <color>907890</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_locked">
+              <calc_fnc>2</calc_fnc>
+              <color>DE0056</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_login">
+              <calc_fnc>2</calc_fnc>
+              <color>1693A7</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_preparing">
+              <calc_fnc>2</calc_fnc>
+              <color>783030</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_reading_from_net">
+              <calc_fnc>2</calc_fnc>
+              <color>FF7F00</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_sending_data">
+              <calc_fnc>2</calc_fnc>
+              <color>54382A</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_sorting_result">
+              <calc_fnc>2</calc_fnc>
+              <color>B83A04</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_statistics">
+              <calc_fnc>2</calc_fnc>
+              <color>6E3803</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_updating">
+              <calc_fnc>2</calc_fnc>
+              <color>B56414</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_writing_to_net">
+              <calc_fnc>2</calc_fnc>
+              <color>6E645A</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_none">
+              <calc_fnc>2</calc_fnc>
+              <color>521808</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.State_other">
+              <calc_fnc>2</calc_fnc>
+              <color>194240</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Transaction Handler" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Handler_commit">
+              <calc_fnc>2</calc_fnc>
+              <color>DE0056</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_rollback">
+              <calc_fnc>2</calc_fnc>
+              <color>784890</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_savepoint">
+              <calc_fnc>2</calc_fnc>
+              <color>D1642E</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_savepoint_rollback">
+              <calc_fnc>2</calc_fnc>
+              <color>487860</color>
+              <drawtype>0</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+        <graph height="150" name="MySQL Handlers" width="800">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <graph_elements>
+            <graph_element item="Template_MySQL:mysql.Handler_write">
+              <calc_fnc>2</calc_fnc>
+              <color>4D4A47</color>
+              <drawtype>1</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_update">
+              <calc_fnc>2</calc_fnc>
+              <color>C79F71</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_delete">
+              <calc_fnc>2</calc_fnc>
+              <color>BDB8B3</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_read_first">
+              <calc_fnc>2</calc_fnc>
+              <color>8C286E</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_read_key">
+              <calc_fnc>2</calc_fnc>
+              <color>BAB27F</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_read_next">
+              <calc_fnc>2</calc_fnc>
+              <color>C02942</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_read_prev">
+              <calc_fnc>2</calc_fnc>
+              <color>FA6900</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_read_rnd">
+              <calc_fnc>2</calc_fnc>
+              <color>5A3D31</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+            <graph_element item="Template_MySQL:mysql.Handler_read_rnd_next">
+              <calc_fnc>2</calc_fnc>
+              <color>69D2E7</color>
+              <drawtype>5</drawtype>
+              <periods_cnt>5</periods_cnt>
+              <type>0</type>
+              <yaxisside>1</yaxisside>
+            </graph_element>
+          </graph_elements>
+          <graphtype>0</graphtype>
+          <percent_left>0.0000</percent_left>
+          <percent_right>0.0000</percent_right>
+          <show_3d>0</show_3d>
+          <show_legend>1</show_legend>
+          <show_triggers>1</show_triggers>
+          <show_work_period>1</show_work_period>
+          <yaxismax>100.0000</yaxismax>
+          <yaxismin>0.0000</yaxismin>
+          <ymax_item_key></ymax_item_key>
+          <ymax_type>0</ymax_type>
+          <ymin_item_key></ymin_item_key>
+          <ymin_type>0</ymin_type>
+        </graph>
+      </graphs>
+      <groups>
+        <group>Templates</group>
+      </groups>
+      <items>
+        <item key="mysql.ibuf_cell_count" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Ibuf cell count</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+                    <delay_flex></delay_flex>
+
+          <delay_flex></delay_flex></item>
+        <item key="mysql.unflushed_log" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Unflushed log</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+                    <delay_flex></delay_flex>
+
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_end" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State end</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Threads_connected" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Threads connected</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_update_multi" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com update multi</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_read_next" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler read next</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_queries_in_cache" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Qcache queries in cache</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.spin_waits" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Spin waits</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.relay_log_space" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Relay log space</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_locked_tables" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB locked tables</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_read_first" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler read first</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Innodb_row_lock_time" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Innodb row lock time</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.lock_system_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Lock system memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.pool_size" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>Pool size</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.page_hash_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Page hash memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.open_files_limit" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>Open files limit</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.ibuf_merges" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Ibuf merges</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_sending_data" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State sending data</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_log_flushes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending log flushes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Opened_tables" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Opened tables</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_not_cached" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Qcache not cached</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.total_mem_alloc" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Total mem alloc</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_locked" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State locked</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Key_read_requests" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>MyISAM Key read requests</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Open_tables" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Open tables</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_transactions" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>InnoDB transactions</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Sort_range" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Sort range</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_delete" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler delete</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Threads_created" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Threads created</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.rows_read" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Rows read</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.read_views" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Read views</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_read_key" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler read key</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Sort_rows" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Sort rows</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Bytes_sent" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Bytes sent</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_buf_pool_flushes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending buf pool flushes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_lock_wait_secs" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB lock wait secs</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.slave_lag" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Slave lag</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_init" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State init</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.log_bytes_written" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Log bytes written</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Questions" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Questions</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_rollback" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler rollback</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_updating" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State updating</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.thread_hash_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Thread hash memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_replace_select" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com replace select</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Slave_retried_transactions" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Slave retried transactions</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_total_blocks" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Qcache total blocks</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Created_tmp_files" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Created tmp files</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_read_rnd" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler read rnd</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Key_reads" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>MyISAM Key reads</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_replace" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com replace</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_free_blocks" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Qcache free blocks</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Select_range_check" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Select range check</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Slow_launch_threads" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Slow launch threads</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Key_buf_bytes_unflushed" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>MyISAM Key buf bytes unflushed</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Select_full_range_join" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Select full range join</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.current_transactions" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Current transactions</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.active_transactions" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Active transactions</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_aio_sync_ios" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending AIO sync ios</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Threads_cached" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Threads cached</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_read_rnd_next" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler read rnd next</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_lock_structs" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB lock structs</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_reading_from_net" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State reading from net</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_freeing_items" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State freeing items</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.binlog_cache_size" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>Binlog cache size</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Select_range" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Select range</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Key_writes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>MyISAM Key writes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_sorting_result" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State sorting result</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.hash_index_cells_used" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Hash index cells used</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_none" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State none</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Open_files" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Open files</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pages_read" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Pages read</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.log_bytes_flushed" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Log bytes flushed</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_insert" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com insert</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_delete" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com delete</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_normal_aio_writes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending normal AIO writes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.free_pages" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Free pages</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.additional_pool_alloc" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Additional pool alloc</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Created_tmp_disk_tables" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Created tmp disk tables</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.slave_running" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Slave running</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_statistics" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State statistics</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.database_pages" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Database pages</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.uncheckpointed_bytes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Uncheckpointed bytes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Select_full_join" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Select full join</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_chkp_writes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending chkp writes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.rows_updated" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Rows updated</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.max_connections" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>Max connections</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Aborted_clients" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Aborted clients</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Sort_scan" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Sort scan</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Key_write_requests" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>MyISAM Key write requests</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.rows_inserted" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Rows inserted</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Connections" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Connections</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_preparing" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State preparing</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_select" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com select</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.os_waits" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>OS waits</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.recovery_system_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Recovery system memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.table_cache" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>Table cache</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Binlog_cache_use" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Binlog cache use</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_sem_wait_time_ms" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB sem wait time ms</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_update" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com update</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_free_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Qcache free memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.spin_rounds" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Spin rounds</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_savepoint" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler savepoint</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_delete_multi" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com delete multi</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pages_created" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Pages created</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_lowmem_prunes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Qcache lowmem prunes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Bytes_received" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Bytes received</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_read_prev" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler read prev</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.hash_index_cells_total" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Hash index cells total</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_inserts" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Qcache inserts</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_load" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com load</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_login" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State login</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.history_list" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>History list</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="proc.num[mysqld]" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>60</delay>
+          <delta>0</delta>
+          <description>MySQL Processes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Qcache_hits" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Qcache hits</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Binlog_cache_disk_use" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Binlog cache disk use</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_commit" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler commit</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_other" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State other</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Slave_open_temp_tables" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Slave open temp tables</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_ibuf_aio_reads" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending ibuf AIO reads</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.adaptive_hash_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Adaptive hash memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_prepare" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler prepare</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.ibuf_inserts" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Ibuf inserts</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.rows_deleted" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Rows deleted</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Table_locks_immediate" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Table locks immediate</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.modified_pages" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Modified pages</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Table_locks_waited" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Table locks waited</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_tables_in_use" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB tables in use</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_sem_waits" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB sem waits</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Created_tmp_tables" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Created tmp tables</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Aborted_connects" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Aborted connects</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.file_fsyncs" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>File fsyncs</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.key_buffer_size" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>MyISAM key buffer size</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.query_cache_size" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>Query cache size</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Innodb_row_lock_waits" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Innodb row lock waits</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.file_system_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>File system memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.binary_log_space" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Binary log space</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.slave_stopped" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Slave stopped</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_discover" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler discover</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_normal_aio_reads" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending normal AIO reads</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_copying_to_tmp_table" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State copying to tmp table</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.ibuf_merged" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Ibuf merged</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Slow_queries" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Slow queries</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_closing_tables" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State closing tables</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.setting.thread_cache_size" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>3600</delay>
+          <delta>0</delta>
+          <description>Thread cache size</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pages_written" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Pages written</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.file_reads" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>File reads</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.ibuf_used_cells" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Ibuf used cells</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Com_insert_select" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Com insert select</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.locked_transactions" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Locked transactions</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_aio_log_ios" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending AIO log ios</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.pending_log_writes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Pending log writes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_log_buffer_size" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB log buffer size</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.ibuf_free_cells" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Ibuf free cells</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.file_writes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>File writes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Max_used_connections" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Max used connections</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_write" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler write</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_savepoint_rollback" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler savepoint rollback</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Threads_running" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Threads running</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Key_buf_bytes_used" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>MyISAM Key buf bytes used</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.dictionary_cache_memory" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>Dictionary cache memory</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units>B</units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Handler_update" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Handler update</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.innodb_open_files" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>InnoDB open files</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.log_writes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Log writes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Sort_merge_passes" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Sort merge passes</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.Select_scan" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>2</delta>
+          <description>Select scan</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+        <item key="mysql.State_writing_to_net" type="0" value_type="0">
+          <applications>
+            <application>MySQL</application>
+          </applications>
+          <data_type>0</data_type>
+          <delay>120</delay>
+          <delta>0</delta>
+          <description>State writing to net</description>
+          <history>60</history>
+          <status>0</status>
+          <trends>365</trends>
+          <units></units>
+          <delay_flex></delay_flex></item>
+      </items>
+          </host>
+  </hosts>
+</zabbix_export>
