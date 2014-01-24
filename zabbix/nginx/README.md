@@ -3,6 +3,21 @@ Agent
     
     mkdir -p /usr/local/zabbix/bin/
     cd /usr/local/zabbix/bin
+
+Add webstatus 
+
+server {
+        listen 801;
+        server_name 10.0.80.11;
+
+        location /webstatus {
+            stub_status on;
+            access_log off;
+            allow 127.0.0.1;
+            allow 10.0.120.11;
+            deny all;
+        }
+    }
     
 vim /usr/local/zabbix/bin/nginx_status.sh
 
