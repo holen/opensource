@@ -21,12 +21,8 @@ vim /etc/zabbix/zabbix_server.conf
 
 netstat -tunlp | grep 10052
 
-    tcp6       0      0 10.0.120.11:10052       :::*                    LISTEN      20984/java 
+    tcp6       0      0 10.0.1.11:10052       :::*                    LISTEN      20984/java 
     
-vim /etc/hosts
-
-    10.0.1.42     tomcat.w.cn 
-
 Zabbix agent install tomcat6
     
     apt-get install tomcat6 
@@ -37,10 +33,6 @@ vim /etc/default/tomcat6
     
 `service tomcat6 restart`  
 
-vim /etc/hosts
-    
-    10.0.1.42     tomcat.w.cn 
-    
 Modify tomcat host web gui
 
     add JMX interface : IP --> 10.0.1.42  Port --> 5555
