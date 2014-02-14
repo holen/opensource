@@ -1,5 +1,8 @@
 # FastDFS 
-FastDFS is an open source high performance distributed file system (DFS). It's major functions include: file storing, file syncing and file accessing, and design for high capacity and load balancing. 
+FastDFS is an open source high performance distributed file system (DFS). It's major functions include: file storing, file syncing and file accessing, and design for high capacity and load balancing.   
+FastDFS has two roles: tracker and storage.  
+The tracker takes charge of scheduling and load balancing for file access.   
+The storage store files and it's function is file management including: file storing, file syncing, providing file access interface.   
 
 ## Install on ubuntu12.04.3
 Install prepare
@@ -26,7 +29,7 @@ Make all
     
     cd FastDFS
     vim make.sh
-    if [ -f /usr/lib/libpthread.so ] || [ -f /usr/local/lib/libpthread.so ] || [ -f /lib64/libpthread.so ] || [ -f /usr/lib64/libpthread.so ] || [ -f /usr/lib/x86_64-linux-gnu/libpthread.so ] || [ -f /usr/lib/libpthread.a ] || [ -f /usr/local/lib/libpthread.a ] || [ -f /lib64/libpthread.a ] || [ -f /usr/lib64/libpthread.a ] || [ -f /usr/lib/x86_64-linux-gnu/libpthread.a ]; then
+        if [ -f /usr/lib/libpthread.so ] || [ -f /usr/local/lib/libpthread.so ] || [ -f /lib64/libpthread.so ] || [ -f /usr/lib64/libpthread.so ] || [ -f /usr/lib/x86_64-linux-gnu/libpthread.so ] || [ -f /usr/lib/libpthread.a ] || [ -f /usr/local/lib/libpthread.a ] || [ -f /lib64/libpthread.a ] || [ -f /usr/lib64/libpthread.a ] || [ -f /usr/lib/x86_64-linux-gnu/libpthread.a ]; then 
     
     ./make.sh
     
@@ -52,6 +55,22 @@ Test php client
     if no /etc/php5/apache2/conf.d/fastdfs_client.ini , run :
     cp fastdfs_client.ini /etc/php5/apache2/conf.d
     service apache2 restart
+    php fastdfs_test.php
+    
+vim test.php
+
+    < ?php
+    //所上传的文件
+    $filename = "aa.php";
+    //调用FastDFS类
+    $fdfs = new FastDFS();
+    //上传文件 $filename 是所上传的文件，html是上传后的更名后缀名为.html
+    $file_info = $fdfs->storage_upload_by_filename($filename,html);
+    //输出上传文件目录和文件名
+    echo $file_info['filename'];
+    ?> 
+    
+`php test.php`
  
 Modify conf
 
@@ -81,15 +100,13 @@ Start storage
 
     /usr/local/bin/fdfs_storaged /etc/fdfs/storage.conf
 
-Test 
-
 vim /etc/fdfs/client
 
     base_path=/var/www/fastdfs
     tracker_server=10.0.140.66:22122 
     http.tracker_server_port=8090 
     #include http.conf   --> 去掉一个#
-
+    
 Upload file
 
     fdfs_test /etc/fdfs/client.conf upload FastDFS_v4.06.tar.gz 
@@ -178,3 +195,4 @@ Test
 [分布式文件系统FastDFS部署实践](http://www.zrwm.com/?p=4567)  
 [ubuntu+FastDFS php_client 安装 api](http://www.cnblogs.com/yeseason/archive/2012/06/29/2570382.html)  
 [分布式文件系统FastDFS原理介绍](http://tech.uc.cn/?p=221)  
+[FastDFS使用经验分享](http://tech.uc.cn/?p=2579)
