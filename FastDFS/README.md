@@ -1,5 +1,6 @@
 # FastDFS 
-FastDFS is an open source high performance distributed file system (DFS). It's major functions include: file storing, file syncing and file accessing, and design for high capacity and load balancing.   
+FastDFS is an open source high performance distributed file system (DFS <500M file).   
+It's major functions include: file storing, file syncing and file accessing, and design for high capacity and load balancing.   
 FastDFS has two roles: tracker and storage.  
 The tracker takes charge of scheduling and load balancing for file access.   
 The storage store files and it's function is file management including: file storing, file syncing, providing file access interface.   
@@ -52,8 +53,7 @@ Install php client
 Test php client 
 
     php -r "phpinfo();" | grep fastdfs --> is enable ?
-    if no /etc/php5/apache2/conf.d/fastdfs_client.ini , run :
-    cp fastdfs_client.ini /etc/php5/apache2/conf.d
+    if no /etc/php5/apache2/conf.d/fastdfs_client.ini , run : cp fastdfs_client.ini /etc/php5/apache2/conf.d
     service apache2 restart
     php fastdfs_test.php
     
@@ -74,7 +74,7 @@ vim test.php
  
 Modify conf
 
-`mkdir -p /var/www/fastdfs`
+`mkdir -p /var/www/fastdfs`  
 `mkdir -p /var/www/fastdfs/storage` 
 
 vim /etc/fdfs/tracker.conf
@@ -189,6 +189,21 @@ Test
     Connection: keep-alive
     Accept-Ranges: bytes
  
+## FastDFS文件下载恢复原始文件名 
+在url后面增加一个参数，指定原始文件名
+
+    http://121.14.161.48:9030/group2/M00/00/89/eQ6h3FKJf_PRl8p4AUz4wO8tqaA688.apk?attname=filename.apk 
+    
+Modify nginx.conf 
+
+    location ~ /group[0-9]/M00 {
+    # root /data/store/data;
+    if ($arg_attname ~ "^(.*).apk") {
+        add_header Content-Disposition "attachment;filename=$arg_attname";
+    }
+    ngx_fastdfs_module;
+    }   
+  
 ## 参考文献
 [FastDFS 官网](https://code.google.com/p/fastdfs/)  
 [FastDFS 配置教程](http://blog.irebit.com/fastdfs-配置教程/)   
