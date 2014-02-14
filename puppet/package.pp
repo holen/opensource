@@ -1,0 +1,4 @@
+package {
+    ["iperf"]:
+    ensure => installed;
+    }
