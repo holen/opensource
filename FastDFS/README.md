@@ -1,5 +1,5 @@
 # FastDFS 
-FastDFS is an open source high performance distributed file system (DFS <500M file).   
+FastDFS is an open source high performance distributed file system (0 < file size < 500M).   
 It's major functions include: file storing, file syncing and file accessing, and design for high capacity and load balancing.   
 FastDFS has two roles: tracker and storage.  
 The tracker takes charge of scheduling and load balancing for file access.   
@@ -9,7 +9,7 @@ The storage store files and it's function is file management including: file sto
 Install prepare
 
     apt-get update
-    apt-get install -y gcc make -y
+    apt-get install -y gcc make libevent-dev -y
     
 Install libevent
 
@@ -44,17 +44,18 @@ Make install
     
 Install php client 
     
-    apt-get install php5-dev
+    apt-get install php5 php5-dev php5-cli
     cd php_client
+    phpize
     ./configure --with-php-config=/usr/bin/php-config 
     make
     make install
     
 Test php client 
 
-    php -r "phpinfo();" | grep fastdfs --> is enable ?
     if no /etc/php5/apache2/conf.d/fastdfs_client.ini , run : cp fastdfs_client.ini /etc/php5/apache2/conf.d
     service apache2 restart
+    php -r "phpinfo();" | grep fastdfs --> is enable ?
     php fastdfs_test.php
     
 vim test.php
@@ -95,6 +96,7 @@ vim /etc/fdfs/storage.conf
     base_path=/var/www/fastdfs/storage
     store_path0=/var/www/fastdfs/storage
     tracker_server=10.0.0.66:22122 
+    tracker_server=10.0.0.58:22122 # 可以绑定多个tracker_server避免单点故障
     
 Start storage
 
@@ -109,11 +111,24 @@ vim /etc/fdfs/client
     
 Upload file
 
+    # test env
     fdfs_test /etc/fdfs/client.conf upload FastDFS_v4.06.tar.gz 
+    # fdfs_upload_file 上传后不可以修改，只能先删除再上传 
+    fdfs_upload_file /etc/fdfs/client.conf /etc/nginx/nginx.conf 
+    # fdfs_append_file 上传后可以修改
+    fdfs_append_file <config_filename> <appender_file_id> <local_filename>
+
+View file info
+
+    fdfs_file_info /etc/fdfs/client.conf group1/M00/00/00/CgCMOlMBfwSAafr0AAALklGBQYw16.conf
 
 Download file
 
      fdfs_download_file /etc/fdfs/client.conf group1/M00/00/00/CgCMOlL9fx6AbuC6AAAVlCq4RtQ5577_big.sh make.sh
+
+Delete files
+    
+    fdfs_delete_file /etc/fdfs/client.conf group1/M00/00/00/CgCMOlMBfwSAafr0AAALklGBQYw16.conf
     
 run the monitor program:
 
