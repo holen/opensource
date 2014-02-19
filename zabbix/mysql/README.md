@@ -82,6 +82,15 @@ zabbix agent
     
     (on server)
     zabbix_get -s agentip -k mysql.Sort_scan 
+
+## Monitor mysql replication 
+zabbix server 
+
+    import zbx-mysql-replication-template.xml
+
+zabbix agent 
+
+    echo "UserParameter=mysql.slave_running,/usr/bin/mysql -hxx -uxx -p'xx' -e 'show slave status\G' | /usr/bin/perl -ne 'print if /Slave_\w{2,}_Running: Yes/' | /usr/bin/perl -ne 'END {print $.}'" >> /etc/zabbix/zabbix_agentd.conf
     
 [0]:(https://www.zabbix.com/documentation/2.2/manual/installation/install_from_packages)
 [1]:(https://www.zabbix.com/forum/showthread.php?t=26503)

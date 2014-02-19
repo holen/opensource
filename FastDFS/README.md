@@ -113,7 +113,10 @@ Upload file
 
     # test env
     fdfs_test /etc/fdfs/client.conf upload FastDFS_v4.06.tar.gz 
-    # fdfs_upload_file 上传后不可以修改，只能先删除再上传 
+    #fdfs_upload_file 上传后不可以修改，只能先删除再上传 
+    #fdfs_test、fdfs_test1是FastDFS自带的测试程序，会对一个文件上传两次，分别作为主文件和从文件。返回的文件ID也是两个。
+    # 主文件ID = 主文件名 + 主文件扩展名
+    # 从文件ID = 主文件名 + 从文件后缀名 + 从文件扩展名
     fdfs_upload_file /etc/fdfs/client.conf /etc/nginx/nginx.conf 
     # fdfs_append_file 上传后可以修改
     fdfs_append_file <config_filename> <appender_file_id> <local_filename>
@@ -130,10 +133,16 @@ Delete files
     
     fdfs_delete_file /etc/fdfs/client.conf group1/M00/00/00/CgCMOlMBfwSAafr0AAALklGBQYw16.conf
     
-run the monitor program:
+Run the monitor program:
 
     /usr/local/bin/fdfs_monitor /etc/fdfs/storage.conf
     
+Delete storage server
+
+    /usr/local/bin/fdfs_monitor <config_filename> delete <group_name> <storage_ip>
+    eg: /usr/local/bin/fdfs_monitor /etc/fdfs/client.conf delete group1 192.168.0.100
+    # storage_server ACTIVE 下是无法删除的
+
 # fastdfs nginx module 
 Get fastdfs-nginx-module
 
@@ -203,6 +212,15 @@ Test
     Last-Modified: Fri, 14 Feb 2014 03:21:12 GMT
     Connection: keep-alive
     Accept-Ranges: bytes
+
+# Install python client
+Download python-client
+    
+    wget https://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar.gz
+    tar zxvf fdfs_client-py-1.2.6.tar.gz
+    cd fdfs_client-py-1.2.6
+    apt-get install python-dev
+    python setup.py install
  
 ## FastDFS文件下载恢复原始文件名 
 在url后面增加一个参数，指定原始文件名
