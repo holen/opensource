@@ -97,7 +97,7 @@ add follow to `server`
 
 # Apache setting 
 
-    LogFormat  "%{Cdn-Src-Ip}i" cdnsrcip                                           
+    LogFormat  "%{Cdn-Src-Ip}i %a %A %l %u  %t %V \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\" " cdnsrcip
     CustomLog ${APACHE_LOG_DIR}/access.log cdnsrcip 
 
     %a - Remote IP address
