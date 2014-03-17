@@ -1,0 +1,31 @@
+logstash-simple.conf
+
+    input { stdin { } }
+    output { stdout { codec => rubydebug } }
+
+java -jar logstash-1.3.3-flatjar.jar agent -f logstash-simple.conf
+
+input { stdin { type => example } }
+output { 
+      stdout { codec => rubydebug }
+        elasticsearch { embedded => true }
+}
+
+curl -s http://127.0.0.1:9200/_status?pretty=true | grep logstash
+curl -gs -XGET "http://localhost:9200/logstash-*/_search?pretty&q=type:example"
+
+java -jar logstash-1.3.3-flatjar.jar agent -f logstash-simple.conf -- web
+http://yourserver:9292 
+
+/etc/logstash/logstash-redis.conf
+
+    input { stdin { } }
+    output {
+          stdout { codec => rubydebug }
+            redis { host => "10.0.0.5" data_type => "list" key => "logstash" }
+    }
+
+redis-cli
+KEYS '*'
+LRANGE logstash -1 -1
+LPOP logstash #del 
