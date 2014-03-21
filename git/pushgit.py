@@ -7,7 +7,7 @@ import os
 def pushmygit(repo, commit_comment):
     subprocess.check_call('bash /data/git/pullgit.sh', shell=True)
     os.chdir('/data/git/%s' %(repo))
-    subprocess.check_call('git add .', shell=True)
+    subprocess.check_call('git add --all .', shell=True)
     subprocess.check_call('git commit -m "%s"' %(commit_comment), shell=True)
     #subprocess.check_call('git push -u origin master', shell=True)
     condition = 1
