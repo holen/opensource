@@ -9,7 +9,12 @@ def pushmygit(repo, commit_comment):
     os.chdir('/data/git/%s' %(repo))
     subprocess.check_call('git add .', shell=True)
     subprocess.check_call('git commit -m "%s"' %(commit_comment), shell=True)
-    subprocess.check_call('git push -u origin master', shell=True)
+    #subprocess.check_call('git push -u origin master', shell=True)
+    condition = 1
+    while condition :
+        ret = subprocess.call('git push -u origin master', shell=True)
+        if ret == 0 :
+            condition = 0
 
 def usage():
     '''Command help'''
