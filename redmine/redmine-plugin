@@ -1,0 +1,28 @@
+## install
+bundle install --no-deployment
+rake redmine:plugins:migrate RAILS_ENV=production
+
+## uninstall
+rake redmine:plugins:migrate NAME=redmine_app_timesheets VERSION=0 RAILS_ENV=production
+
+apt-get install build-essential
+apt-get install libssl-dev
+apt-get install zlib1g-dev zlib1g
+apt-get install libxml2-dev libxml2
+gem install libxml-ruby -v '2.7.0'
+
+## screenshot paste
+/opt/redmine-2.4.1-1/git/bin/git clone https://github.com/undx/redmine_screenshot_paste.git
+
+## mylyn 
+/opt/redmine-2.4.1-1/git/bin/git clone git://github.com/danmunn/redmine_mylyn_connector.git
+
+## timesheet -- no install
+/opt/redmine-2.4.1-1/git/bin/git clone https://github.com/maxrossello/redmine_app_timesheets.git
+/opt/redmine-2.4.1-1/git/bin/git clone https://github.com/maxrossello/redmine_app__space.git
+
+## plugin charts
+git clone https://github.com/pullmonkey/open_flash_chart.git
+/opt/redmine-2.4.1-1/git/bin/git clone https://github.com/pharmazone/redmine_charts2.git
+
+
