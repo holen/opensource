@@ -86,6 +86,15 @@
         proxy_pass http://webabc;
     }
 
+# proxy cache
+nginx.conf
+
+    proxy_cache_path /data/nginx/cache/zone levels=1:2 keys_zone=e-w-cn:80m max_size=10000m inactive=600m;
+
+conf
+
+    proxy_cache e-w-cn;
+
 # CDN real client IP 
 add this to abc.com conf
 
