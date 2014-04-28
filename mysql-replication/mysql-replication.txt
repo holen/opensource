@@ -33,3 +33,6 @@ show processlist;
 SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1; SLAVE START; 
 
 ## Mysql-slave-2   10.0.0.8
+
+mysqlcheck -r mysql proc -uepcare -p
+mysql_upgrade -uroot -ppassword

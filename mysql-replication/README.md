@@ -97,6 +97,10 @@ Set replication
     show slave status;
     start slave;
     show processlist;
+
+Skip a error
+
+    stop slave; set global sql_slave_skip_counter=1; start slave ;
     
 ## Test 
 Master 
