@@ -91,6 +91,7 @@ zabbix server
 zabbix agent 
 
     echo "UserParameter=mysql.slave_running,/usr/bin/mysql -hxx -uxx -p'xx' -e 'show slave status\G' | /usr/bin/perl -ne 'print if /Slave_\w{2,}_Running: Yes/' | /usr/bin/perl -ne 'END {print $.}'" >> /etc/zabbix/zabbix_agentd.conf
+    UserParameter=mysql.check_bak,/usr/bin/tail -n 1 /var/log/bak_log/fullbak-$(date +%Y%m%d0001).log | awk -F'<|>' '{print $2}'
     
 [0]:(https://www.zabbix.com/documentation/2.2/manual/installation/install_from_packages)
 [1]:(https://www.zabbix.com/forum/showthread.php?t=26503)
