@@ -12,12 +12,12 @@ chown -R mysql.root /data/mysql
 chown -R mysql.root /data/mysql-tmp
 chown -R mysql.root /data/mysql-log
 
-sed -i "/device/a \ \ \/data\/mysql-log\/* rw," user.sbin.mysqld
-sed -i "/device/a \ \ \/data\/mysqllog\/ r," user.sbin.mysqld
-sed -i "/device/a \ \ \/data\/mysql-tmp\/* rw," user.sbin.mysqld
-sed -i "/device/a \ \ \/data\/mysql-tmp\/ r," user.sbin.mysqld
-sed -i "/device/a \ \ \/data\/mysql\/** rwk," user.sbin.mysqld
-sed -i "/device/a \ \ \/data\/mysql\/ r," user.sbin.mysqld
+sed -i "/device/a \ \ \/data\/mysql-log\/* rw," /etc/apparmor.d/usr.sbin.mysqld
+sed -i "/device/a \ \ \/data\/mysqllog\/ r," /etc/apparmor.d/usr.sbin.mysqld
+sed -i "/device/a \ \ \/data\/mysql-tmp\/* rw," /etc/apparmor.d/usr.sbin.mysqld
+sed -i "/device/a \ \ \/data\/mysql-tmp\/ r," /etc/apparmor.d/usr.sbin.mysqld
+sed -i "/device/a \ \ \/data\/mysql\/** rwk," /etc/apparmor.d/usr.sbin.mysqld
+sed -i "/device/a \ \ \/data\/mysql\/ r," /etc/apparmor.d/usr.sbin.mysqld
 
 sed -i 's/^datadir.*/datadir=\/data\/mysql/g' /etc/mysql/my.cnf
 sed -i 's/^tmpdir.*/tmpdir=\/data\/mysql-tmp/g' /etc/mysql/my.cnf
