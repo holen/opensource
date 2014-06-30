@@ -4,6 +4,9 @@
 
 # install php  
     
+    apt-get install python-software-properties
+    apt-add-repository ppa:ondrej/php5
+    apt-get update
     apt-get install php5 libapache2-mod-php5 php5-mcrypt -y   
 
 # install phpmyadmin  
@@ -51,7 +54,7 @@ Configure
 
 Test
     
-    php -r "phpinfo();" | grep mem
+    php -r "phpinfo();" | grep redis
     vim 1
     <?php
     $redis = new Redis();
