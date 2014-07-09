@@ -14,6 +14,12 @@
     apt-cache search fail2ban
     apt-get install fail2ban
 
+# Install on centos 6.5
+
+    wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    rpm -i epel-release-6-8.noarch.rpm
+    yum -y install fail2ban
+
 # Usage
 ## Definitions
     fail2ban包含下面5个要素，理解这5个要素之间的关系，对于如何配置如何使用fail2ban是很有帮助的

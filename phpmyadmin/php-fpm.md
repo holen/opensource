@@ -60,3 +60,5 @@ enable mod
 test
 
     ab -n 10000 -c 1000 http://xm.e.cn/t.php
+    09,39 *     * * *     root   [ -x /usr/lib/php5/maxlifetime ] && [ -d /var/lib/php5 ] && find /var/lib/php5/ -depth -mindepth 1 -maxdepth 1 -type f -cmin +$(/usr/lib/php5/maxlifetime) -print0 | xargs -n 200 -r -0 rm
+    webbench -c 200 -t http://xm.e.cn/
