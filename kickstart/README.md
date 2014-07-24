@@ -70,3 +70,8 @@ linux安装大致可以分为2个阶段
     mkisofs完后，/data/autoiso/下会多个autoinstall.iso文件，现在就可以使用autoinstall.iso镜像进行自动化安装
     md5sum -c md5sum.txt # 验证文件
     使用该镜像安装ubuntu系统，在开机界面选择Auto install系统就会自动安装完成
+
+## 参考文献
+
+    http://fedoraproject.org/wiki/Anaconda/Kickstart#bootloader  
+    http://fedoraproject.org/wiki/Anaconda/Kickstart/zh-cn#part_or_partition.28.E5.BF.85.E9.9C.80.29

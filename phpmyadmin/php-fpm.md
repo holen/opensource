@@ -62,3 +62,17 @@ test
     ab -n 10000 -c 1000 http://xm.e.cn/t.php
     09,39 *     * * *     root   [ -x /usr/lib/php5/maxlifetime ] && [ -d /var/lib/php5 ] && find /var/lib/php5/ -depth -mindepth 1 -maxdepth 1 -type f -cmin +$(/usr/lib/php5/maxlifetime) -print0 | xargs -n 200 -r -0 rm
     webbench -c 200 -t http://xm.e.cn/
+
+php.ini 
+
+    upload_max_filesize = 80M
+    post_max_size = 80M
+    max_input_time = 600
+    max_execution_time = 600
+    date.timezone = Asia/Shanghai
+    disable_functions = pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,execute,passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_serve,escapeshellarg,escapeshellcmd,proc_close,popen,show_source,phpinfo
+    memory_limit = 64m
+    expose_php = off
+    display_errors = off
+    open_basedir = /data/apache2/:/tmp/ #将用户可操作的文件限制在某目录下
+    chroot = /data/apache2/ #把指定的网站完完全全限制在一个目录下
