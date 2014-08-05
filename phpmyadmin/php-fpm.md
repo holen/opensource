@@ -32,14 +32,6 @@ modify conf
     sed -i 's!^chroot =!; chroot=!' /etc/php5/fpm/php.ini
 
     echo "listen = /var/run/php-fpm.sock" >> /etc/php5/fpm/pool.d/www.conf
-    echo "disable_functions = pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsi❯
-    echo "memory_limit = 256M" >> /etc/php5/fpm/php.ini
-    echo "expose_php = off" >> /etc/php5/fpm/php.ini                                                                       
-    echo "display_errors = off" >> /etc/php5/fpm/php.ini
-
-    echo "open_basedir = /data/apache2/wcn" >> /etc/php5/fpm/php.ini
-    echo "chroot = /data/apache2/wcn" >> /etc/php5/fpm/php.ini
-    echo "listen = /var/run/php-fpm.sock" >> /etc/php5/fpm/pool.d/www.conf
     echo "disable_functions = pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,execute,passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_serve,escapeshellarg,escapeshellcmd,proc_close,popen,show_source,phpinfo" >> /etc/php5/fpm/php.ini
     echo "memory_limit = 256M" >> /etc/php5/fpm/php.ini
     echo "expose_php = off" >> /etc/php5/fpm/php.ini

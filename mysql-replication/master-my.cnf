@@ -12,6 +12,7 @@ nice		= 0
 set-variable=local-infile=0
 #############
 # master
+wait_timeout=180 # 即设置mysql连接睡眠时间为100秒，任何sleep连接睡眠时间若超过100秒，将会被mysql服务自然终止
 server-id	= 1
 binlog-format   = mixed
 log_bin		= mysql-bin
