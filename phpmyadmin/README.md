@@ -170,3 +170,7 @@ zend_extension="/usr/local/zend/ZendGuardLoader.so"
 
 access http://ip/info.php  
 Zend Guard Loader	enable  
+
+http://askubuntu.com/questions/378734/how-to-configure-apache-to-run-php-as-fastcgi-on-ubuntu-12-04-via-terminal  
+http://httpd.apache.org/docs/current/mod/core.html#virtualhost  
+http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html
