@@ -248,7 +248,7 @@ server
 
 ## 参考文献： 
 
-[grokdebug](http://grokdebug.herokuapp.com/)
-[elasticsearch_download](http://www.elasticsearch.org/download)
-[logstash_doc](http://logstash.net/docs/1.4.2/)
-[ Kibana+Logstash+Elasticsearch 日志查询系统](http://enable.blog.51cto.com/747951/1049411)
+[grokdebug](http://grokdebug.herokuapp.com/)  
+[elasticsearch_download](http://www.elasticsearch.org/download)  
+[logstash_doc](http://logstash.net/docs/1.4.2/)  
+[ Kibana+Logstash+Elasticsearch 日志查询系统](http://enable.blog.51cto.com/747951/1049411)  
