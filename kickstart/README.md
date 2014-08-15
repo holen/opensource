@@ -73,5 +73,5 @@ linux安装大致可以分为2个阶段
 
 ## 参考文献
 
-    http://fedoraproject.org/wiki/Anaconda/Kickstart#bootloader  
-    http://fedoraproject.org/wiki/Anaconda/Kickstart/zh-cn#part_or_partition.28.E5.BF.85.E9.9C.80.29
+[kictstart](http://fedoraproject.org/wiki/Anaconda/Kickstart#bootloader)
+[kictstart_zh-cn](http://fedoraproject.org/wiki/Anaconda/Kickstart/zh-cn#part_or_partition.28.E5.BF.85.E9.9C.80.29)

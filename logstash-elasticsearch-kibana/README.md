@@ -1,4 +1,6 @@
 # elasticsearch logstash kibana redis 
+one machine install soft: jdk logstash kibana apache redis elasticsearch  
+another machine install soft: jdk logstash 
 ## Install java
 
     download jdk-7u51-linux-x64.tar.gz
@@ -21,9 +23,9 @@
 Download and install
 
     apt-get install make gcc
-    wget http://download.redis.io/releases/redis-2.8.5.tar.gz 
-    tar zxvf redis-2.8.5.tar.gz
-    cd redis-2.8.5
+    wget http://download.redis.io/releases/redis-2.8.13.tar.gz
+    tar zxvf redis-2.8.13.tar.gz
+    cd redis-2.8.13
     cd deps
     make hiredis lua jemalloc linenoise
     cd ..
@@ -77,11 +79,10 @@ test
 
 ## Install elasticsearch
 
-    mkdir -p /data/elasticsearch
-    cd /data/elasticsearch
-    wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.11.tar.gz 
-    tar zxvf elasticsearch-0.90.11.tar.gz
-    mv elasticsearch-0.90.11 elasticsearch
+    cd /data/
+    wget wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.2.tar.gz
+    tar zxvf elasticsearch-1.3.2.tar.gz
+    mv elasticsearch-1.3.2 elasticsearch
     /data/elasticsearch/bin/elasticsearch -f &
 
 test
@@ -95,8 +96,8 @@ test
 Install apache
 
     apt-get install apache2 apache2-mpm-prefork php5 libapache2-mod-php5
-    echo ‘ServerName kibana’ > /etc/apache2/httpd.conf
-    mkdir -p /data/www/kibana
+    echo 'ServerName kibana' > /etc/apache2/httpd.conf
+    mkdir -p /data/www/
     chown -R www-data.www-data /data/www
 
     vim /etc/apache2/sites-available/kibana
@@ -125,16 +126,21 @@ Install apache
 
 Configure kibana
 
-    wget https://download.elasticsearch.org/kibana/kibana/kibana-3.0.0milestone4.tar.gz 
-    tar zxvf /data/kibana-3.0.0milestone4.tar.gz -C /data/www/kibana
+    wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz
+    tar zxvf /data/kibana-3.0.0milestone4.tar.gz -C /data/www/
+    mv kibana-3.1.0 kibana
     chown -R www-data.www-data /data/www
-    
     service apache2 restart
 
 ## logstash
 Download logstash
 
-    wget http://download.elasticsearch.org/logstash/logstash/logstash-1.3.3-flatjar.jar 
+    cd /data/
+    wget https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz
+    tar zxvf logstash-1.4.2.tar.gz
+    mv logstash-1.4.2 logstash
+    ./logstash/bin/plugin install contrib # https://download.elasticsearch.org/logstash/logstash/logstash-contrib-1.4.2.tar.gz
+    ./logstash/bin/logstash agent -f logstash.apache.conf &
 
 Write apache log to redis db on client
 
@@ -240,4 +246,9 @@ server
       endscript
     }
 
- 
+## 参考文献： 
+
+[grokdebug](http://grokdebug.herokuapp.com/)
+[elasticsearch_download](http://www.elasticsearch.org/download)
+[logstash_doc](http://logstash.net/docs/1.4.2/)
+[ Kibana+Logstash+Elasticsearch 日志查询系统](http://enable.blog.51cto.com/747951/1049411)
