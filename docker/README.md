@@ -84,6 +84,6 @@ run images
 ## 参考文献
 [docker中文文档](http://www.widuu.com/chinese_docker/userguide/README.html)  
 [在 Ubuntu 中用 Docker 管理 Linux Container 容器](http://linux.cn/article-3139-1.html)  
-[如何进入Docker容器]9http://www.oschina.net/translate/enter-docker-container)  
+[如何进入Docker容器](http://www.oschina.net/translate/enter-docker-container)  
 [为什么不需要在 Docker 容器中运行 sshd](http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp)  
 [在UOS上体验CoreOS](https://www.ustack.com/blog/running-coreos-on-uos/)  
