@@ -10,10 +10,26 @@ install on ubuntu12.04.3
     docker run -i -t ubuntu /bin/bash
     #上边的命令会自动下载ubuntu镜像，并且会在容器内执行bash,输入exit来退出
     docker pull ubuntu #下载ubuntu镜像
-    
+
 test run
 
     docker run -i -t ubuntu /bin/bash 
+
+access container 
+
+    # install nsenter
+    wget https://www.kernel.org/pub/linux/utils/util-linux/v2.25/util-linux-2.25.tar.gz
+    tar zxvf util-linux-2.25.tar.gz 
+    cd util-linux-2.25
+    less README
+    ./configure 
+    make
+    make install
+    docker ps -a
+    # get container pid
+    docker inspect --format "{{ .State.Pid }}" container-id
+    # access container 
+    nsenter --target $pid --mount --uts --ipc --net --pid
 
 连接container
 
@@ -22,16 +38,36 @@ test run
 create image
 
     docker build --tag my/repo /data/Dockerfile
-    
+
 push images to Docker Hub
 
     docker login
     docker push my/repo
-    
+
 run images
 
     docker run --name <name for container> -d my/repo --noprealloc --smallfiles
-        
+
+##更新提交镜像
+
+    docker run -t -i ubuntu /bin/bash 
+    docker commit -m="Add ssh" -a="holen" cfa69f9daf45 ubuntu:v2
+
+##管理容器数据
+添加一个数据卷
+
+    docker run -d -P --name web -v /webapp training/webapp python app.python
+
+挂载一个主机目录作为卷
+
+    docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
+
+创建一个挂在数据卷的容器
+
+    docker run -d -v /dbdata --name dbdata training/postgres
+    docker run -d --volumes-from dbdata --name db1 training/postgres
+    docker run -d --volumes-from dbdata --name db2 training/postgres
+
 ##自定义 Linux 网桥
 如果你想自定义网桥，你可以执行以下步骤。你可以在这个网桥后面分配一个子网，并为这个子网分配地址。下面的命令会为 Docker 子网分配 10.0.0.0/24 地址段：
 
@@ -48,3 +84,6 @@ run images
 ## 参考文献
 [docker中文文档](http://www.widuu.com/chinese_docker/userguide/README.html)  
 [在 Ubuntu 中用 Docker 管理 Linux Container 容器](http://linux.cn/article-3139-1.html)  
+[如何进入Docker容器]9http://www.oschina.net/translate/enter-docker-container)  
+[为什么不需要在 Docker 容器中运行 sshd](http://www.oschina.net/translate/why-you-dont-need-to-run-sshd-in-docker?cmp)  
+[在UOS上体验CoreOS](https://www.ustack.com/blog/running-coreos-on-uos/)  

@@ -1,0 +1,26 @@
+# docker - Docker image and container command line interface
+# run a ubuntu container
+docker run -i -t ubuntu /bin/bash
+docker run --name <name for container> -d my/repo --noprealloc --smallfiles
+
+# link a container to another container
+docker run -link redis:db -i -t ubuntu:12.04 /bin/bash
+
+# create image
+docker build --tag my/repo /data/Dockerfile
+
+# push image to docker hub
+docker login
+docker push my/repo
+
+# update image
+docker run -t -i ubuntu /bin/bash 
+docker commit -m="Add ssh" -a="holen" cfa69f9daf45 ubuntu:v2
+
+# mount a data volume
+docker run -d -P --name web -v /webapp training/webapp python app.python
+
+# mount data from a container 
+docker run -d -v /dbdata --name dbdata training/postgres
+docker run -d --volumes-from dbdata --name db1 training/postgres
+docker run -d --volumes-from dbdata --name db2 training/postgres
