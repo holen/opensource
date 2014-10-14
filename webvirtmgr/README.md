@@ -1,4 +1,9 @@
 # Install webvirtmgr
+environment
+
+    Ubuntu 14.04 LTS
+    python 2.7.6
+
 install some prereq packages including the webserver nginx to host webvirtmgr
 
     apt-get install git python-pip python-libvirt python-libxml2 novnc supervisor nginx
@@ -18,6 +23,8 @@ create database tables (answer yes to create a valid user and specify a username
 
     ./manage.py syncdb
     then create a superuser, input username email password
+
+    ./webvirtmgr/manage.py createsuperuser # add another user
  
  
 collect static files (answer yes to continue when being asked)
@@ -32,16 +39,25 @@ move webvirtmgr to your ngix web directory.
 create the file /etc/nginx/sites-available/webvirtmgr.conf and add the following lines
 
     server {
-    listen 80 default_server;
-    server_name $hostname;
-    access_log /var/log/nginx/webvirtmgr_access_log;
-    location / {
-    proxy_pass http://127.0.0.1:8000;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-for $proxy_add_x_forwarded_for;
-    proxy_set_header Host $host:$server_port;
-    proxy_set_header X-Forwarded-Proto $remote_addr;
-    }
+        listen 80 default_server;
+        server_name $hostname;
+        #access_log /var/log/nginx/webvirtmgr_access_log; 
+
+        location /static/ {
+            root /var/www/webvirtmgr/webvirtmgr; # or /srv instead of /var
+            expires max;
+        }
+
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-for $proxy_add_x_forwarded_for;
+            proxy_set_header Host $host:$server_port;
+            proxy_set_header X-Forwarded-Proto $remote_addr;
+            proxy_connect_timeout 600;
+            proxy_read_timeout 600;
+            proxy_send_timeout 600;
+        }
     }
  
 activate the webvirtmgr configuration for nginx and remove the default one
@@ -134,3 +150,5 @@ Test connection
     Thread(s) per core:  1
     NUMA cell(s):        1
     Memory size:         2019260 kB
+
+

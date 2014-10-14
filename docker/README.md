@@ -78,10 +78,12 @@ run images
 然后在 /etc/default/docker.io 文件的 DOCKER\_OPTS 变量里添加“-b=br0”选项，并重启 Docker 服务：
 
     $ service docker.io restart
+    $ docker -d -b="bridge0" >> /var/log/docker.log 2>&1 &
 
 到目前为止，任何创建的容器都会连上 br0 网桥，它们的 IP 地址会从 10.0.0.0/24 中自动分配（译注：在10.0.0.2到10.0.0.254之间随机分配）。 
 
 ## 参考文献
+[docker 英文文档](https://docs.docker.com/articles/networking/#bridge-building)  
 [docker中文文档](http://www.widuu.com/chinese_docker/userguide/README.html)  
 [在 Ubuntu 中用 Docker 管理 Linux Container 容器](http://linux.cn/article-3139-1.html)  
 [如何进入Docker容器](http://www.oschina.net/translate/enter-docker-container)  
