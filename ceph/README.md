@@ -402,3 +402,13 @@ mount ceph fs as a kernel driver
 
     mkdir /mnt/mycephfs
     mount.ceph {ip}:6789:/ /mnt/mycephfs/ -o name=admin,secretfile=/root/admin.secret
+
+##参考文献  
+[ceph架构剖析](https://www.ustack.com/blog/ceph_infra/)  
+[ceph存储](http://www.wzxue.com/ceph-storage/)  
+[ceph官网](http://ceph.com/docs/master/start/intro/)  
+[ceph译](http://blog.csdn.net/dapao123456789/article/category/2197933)  
+[ceph使用](http://my.oschina.net/renguijiayi/blog/293317)  
+[IBM关于ceph的说明](http://www.ibm.com/developerworks/cn/linux/l-ceph/)  
+[ceph性能测试](http://tech.uc.cn/?p=1223#more-1223)  
+[Ceph浅析（中）：结构、工作原理及流程](http://www.csdn.net/article/2014-04-08/2819192-ceph-swift-on-openstack-m)
