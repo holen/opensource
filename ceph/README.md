@@ -411,4 +411,5 @@ mount ceph fs as a kernel driver
 [ceph使用](http://my.oschina.net/renguijiayi/blog/293317)  
 [IBM关于ceph的说明](http://www.ibm.com/developerworks/cn/linux/l-ceph/)  
 [ceph性能测试](http://tech.uc.cn/?p=1223#more-1223)  
-[Ceph浅析（中）：结构、工作原理及流程](http://www.csdn.net/article/2014-04-08/2819192-ceph-swift-on-openstack-m)
+[Ceph浅析（中）：结构、工作原理及流程](http://www.csdn.net/article/2014-04-08/2819192-ceph-swift-on-openstack-m)  
+[ceph架构](http://wenku.baidu.com/link?url=SWE2EkDMo2InPmgMrSQiaHaHOj_s8VomRht7nB-M3DdX4kaRF-zfZTEVDkg2bR0Xb0g3sQzbWdkk9Xx51dj8xpSJRvsUpd2x4IaPCXmRbUa)  
