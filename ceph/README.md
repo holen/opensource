@@ -130,6 +130,20 @@ Prepare the OSDs
     Journal 是底层单机存储模块用来维护事务一致性的，它是数据库领域的 redo log。
     如果你使用本地文件代替磁盘，需要后面加上就行，如下
     ceph-deploy osd prepare data1:/var/local/osd0:/var/local/journal0
+    
+remove osd
+
+    1、out或者stop需要移除的OSD
+    # ceph osd out 6
+    # stop ceph-osd id=6
+    2、移除Crushmap中的信息
+    # ceph osd crush remove osd.6
+    3、移除OSD
+    # ceph osd rm 6
+    4、删除OSD的数据目录
+    # rm -fr /var/lib/ceph/osd/ceph-6
+    5、删除认证 
+    # ceph auth del osd.6
  
 List the disks on a node
 
@@ -412,4 +426,6 @@ mount ceph fs as a kernel driver
 [IBM关于ceph的说明](http://www.ibm.com/developerworks/cn/linux/l-ceph/)  
 [ceph性能测试](http://tech.uc.cn/?p=1223#more-1223)  
 [Ceph浅析（中）：结构、工作原理及流程](http://www.csdn.net/article/2014-04-08/2819192-ceph-swift-on-openstack-m)  
-[ceph架构](http://wenku.baidu.com/link?url=SWE2EkDMo2InPmgMrSQiaHaHOj_s8VomRht7nB-M3DdX4kaRF-zfZTEVDkg2bR0Xb0g3sQzbWdkk9Xx51dj8xpSJRvsUpd2x4IaPCXmRbUa)  
+[ceph架构](http://wenku.baidu.com/link?url=SWE2EkDMo2InPmgMrSQiaHaHOj_s8VomRht7nB-M3DdX4kaRF-zfZTEVDkg2bR0Xb0g3sQzbWdkk9Xx51dj8xpSJRvsUpd2x4IaPCXmRbUa)   
+[ceph package](http://ceph.com/packages/)   
+[ceph中文文档](http://docs.openfans.org/ceph/ceph4e2d658765876863/ceph-1)  
