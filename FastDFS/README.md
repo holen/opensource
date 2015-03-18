@@ -158,6 +158,7 @@ Install nginx
     cd nginx-1.5.9/ 
     apt-get install libssl-dev zlib1g-dev libpcre3-dev libpcre3 php5-gd libgd2-xpm libgd2-xpm-dev  libgeoip-dev 
     ./configure --sbin-path=/usr/sbin --prefix=/etc/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-client-body-temp-path=/var/lib/nginx/body --http-log-path=/var/log/nginx/access.log --http-proxy-temp-path=/var/lib/nginx/proxy --lock-path=/var/lock/nginx.lock --pid-path=/var/run/nginx.pid --with-debug --with-http_addition_module --with-http_dav_module --with-http_geoip_module --with-http_gzip_static_module --with-http_image_filter_module --with-http_stub_status_module --add-module=/usr/local/fastdfs-nginx-module/src/ 
+    # ./configure --prefix=/usr/local/nginx --add-module=/home/soft/fastdfs-nginx-module/src --add-module=/home/soft/lua-nginx-module-master/ --with-http_image_filter_module
     make 
     make install
     mkdir -p /var/lib/nginx/body

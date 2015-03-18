@@ -42,3 +42,13 @@ agent
     puppet agent --server puppet-server.w.cn --test
     more /tmp/puppettest1.txt
     find /var/lib/puppet/ssl/ -iname 'hostname'.pem | xargs -I {} rm -rf {}
+
+# Install foreman
+
+    echo "deb http://deb.theforeman.org/ precise stable" > /etc/apt/sources.list.d/foreman.list
+    wget -q http://deb.theforeman.org/foreman.asc -O- | apt-key add - 
+    apt-get update && apt-get install foreman-installer
+    apt-get install foreman foreman-mysql foreman-libvirt foreman-proxy
+    foreman-installer -i
+    /etc/init.d/foreman start
+    /etc/init.d/foreman-proxy start

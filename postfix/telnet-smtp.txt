@@ -1,0 +1,194 @@
+利用telnet进行SMTP的验证
+=========先计算BASE64编码的用户名密码，认证登录需要用到===========
+[crazywill@localhost crazywill]$ perl -MMIME::Base64 -e 'print encode_base64("crazywill");'
+Y3Jhenl3aWxs
+
+[crazywill@localhost crazywill]$ perl -MMIME::Base64 -e 'print encode_base64("mypassword");'
+bXlwYXNzd29yZA==
+======================开始SMTP发信操作==========================
+[crazywill@localhost crazywill]$ telnet smtp.163.com 25 #telnet登录25端口
+Trying 202.108.5.81...
+Connected to smtp.163.com.
+Escape character is '^]'.
+220 163.com Coremail SMTP(Anti Spam) System
+EHLO smtp.163.com # 握手 :)
+250-mail
+250-PIPELINING
+250-AUTH LOGIN PLAIN
+250-AUTH=LOGIN PLAIN
+250 8BITMIME
+AUTH LOGIN # 开始认证登录
+334 dXNlcm5hbWU6
+crazywill
+334 UGFzc3dvcmQ6
+mypassword
+535 Error: authentication failed # 直接用户名密码不能登录
+AUTH LOGIN
+334 dXNlcm5hbWU6
+Y3Jhenl3aWxs
+334 UGFzc3dvcmQ6
+bXlwYXNzd29yZA==
+235 Authentication successful # 使用Base64编码则成功登录
+MAIL FROM:<test@163.com> # 邮件发送方
+553 You are not authorized to send mail, authentication is required # 不可伪造发送邮件
+MAIL FROM:<crazywill@163.com> # 邮件发送方
+250 Mail OK
+RCPT TO:<crazywill@163.com> # 邮件的接收方，若有多个收件人，则重复这一语句多次。
+250 Mail OK
+DATA # 邮件体内容
+354 Please start mail input.
+TO: crazywill@163.com # 此处的TO，FROM，等内容，可以随便造假 :) 可以骗人但骗不了懂得查看邮件源码的。
+FROM: cccc@163.com
+SUBJECT: test by telnet/smtp
+
+test, just a test. # 邮件正文内容，与Header部分空一行开始写
+. # 邮件写完，以一个句点加回车结果。
+250 Mail OK queued as smtp10,wKjADQ2ApxRnnqBE0CWaEw==.38326S3 # 返回250 表示发送成功。
+NOOP # 空语句，不执行任何操作，一般用来保持和服务器连接，不要掉线
+250 OK
+QUIT # 退出
+221 Closing connection. Good bye.
+Connection closed by foreign host.
+[crazywill@localhost crazywill]$
+
+
+======================开始POP3收信操作==========================
+
+[crazywill@localhost crazywill]$ telnet pop.163.com 110 #telnet登录110端口
+Trying 202.108.5.104...
+Connected to pop.163.com.
+Escape character is '^]'.
++OK Welcome to coremail Mail Pop3 Server (163com[20050206])
+USER crazywill # 用户名
++OK core mail
+PASS mypassword # 登录密码
++OK 254 message(s) [27676669 byte(s)]
+STAT # 查看邮箱状态
++OK 254 27676669
+LIST # 邮件列表
++OK 254 27676669
+1 2468
+2 21945
+3 33136
+4 2071
+5 3364
+6 18906
+7 3136
+8 24764
+.................
+
+TOP 254 0 # 查看指定邮件的邮件头，0表示查看整个邮件头，其它正整数表示限制返回多少行。
++OK core mail
+Received: from smtp.63.com (unknown [58.252.70.158])
+by smtp5 (Coremail) with SMTP id wKjREDrA9gIfFqlEjCnRAg==.29062S4;
+Mon, 03 Jul 2006 21:07:18 +0800 (CST)
+TO: crazywill@163.com
+FROM : cccc@163.com # 这里即前面发信时伪造的一个假发送人信息，平时正常操作只显示这个。
+SUBJECT: test by telnet/smtp # 邮件主题
+Message-Id: <44A91687.0E6F6C.07562>
+Date: Mon, 3 Jul 2006 21:07:19 +0800 (CST)
+Sender: crazywill@163.com # 这里是真正的发送人，不可伪造。
+
+
+.
+RETR 254 # 获取指定邮件
++OK 354 octets
+Received: from smtp.63.com (unknown [58.252.70.158])
+by smtp5 (Coremail) with SMTP id wKjREDrA9gIfFqlEjCnRAg==.29062S4;
+Mon, 03 Jul 2006 21:07:18 +0800 (CST)
+TO: crazywill@163.com
+FROM : cccc@163.com
+SUBJECT: test by telnet/smtp
+Message-Id: <44A91687.0E6F6C.07562>
+Date: Mon, 3 Jul 2006 21:07:19 +0800 (CST)
+Sender: crazywill@163.com
+
+test, just a test.
+.
+
+DELE 254 # 删除第254封邮件
++OK core mail
+STAT # 查看邮箱状态
++OK 253 27676315
+QUIT # 退出
++OK core mail
+Connection closed by foreign host.
+[crazywill@localhost crazywill]$
+
+
+===============================================================
+
+QUESTION:
+如何发送给多人，如何CC，BCC？
+
+ANSWER: (此答案由SnifferPro监听OUTLOOK发送多人邮件分析出来的)
+同一封信发送/抄送给多人，在MAIL FROM:<...> 后，多次使用 RCPT TO:<...>
+每次一个邮件地址，需要发给多少人就 RCPT TO 多少次。
+
+在DATA里面写的CC，BCC，TO，等信息只起显示作用，与实际发送人接收人无关。
+
+CC与BCC的差别：同样都是RCPT TO指定收件人，但是邮件客户端程序，不会将BCC的收件人写到DATA要传送的数据里。
+ 
+使用IMAP
+[crazywill@localhost crazywill]$ telnet 192.168.0.1 143      #telnet登录IMAP协议的143端口
+Trying 192.168.0.1...
+Connected to xxxxxx
+Escape character is '^]'.
+* OK xxxxxxx System IMap Server Ready
+A01 LOGIN abc 123       #用户登录
+A01 OK LOGIN completed
+A02 LIST "" *           #列出所有信箱列表
+* LIST () "/" "INBOX"
+* LIST () "/" "Drafts"
+* LIST () "/" "Sent Items"
+* LIST () "/" "Trash"
+* LIST () "/" "Junk E-mail"
+* LIST () "/" "Virus Items"
+* LIST () "/" "&XfJT0ZABkK5O9g-"
+* LIST () "/" "&g0l6Pw-"
+* LIST () "/" "&XfJT0ZABkK5O9g-/DailyReport"
+* LIST () "/" "Jira"
+* LIST () "/" "Admin"
+* LIST () "/" "&V4NXPpCuTvY-"
+A02 OK LIST Completed
+A03 Select INBOX         #选择收件箱
+* 37 EXISTS
+* 0 RECENT
+* OK [UIDVALIDITY 1] UIDs valid
+* FLAGS (\Answered \Seen \Deleted \Draft)
+* OK [PERMANENTFLAGS (\Answered \Seen \Deleted \Draft)] Limited
+A03 OK [READ-WRITE] SELECT completed
+A04 Search ALL           #查询收件箱所有邮件
+* OK X-SEARCH in progress
+* OK X-SEARCH in progress
+* OK X-SEARCH in progress
+* SEARCH 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37
+A04 OK SEARCH completed            # 列出符合条件的邮件序号(ALL表示列出当前信箱INBOX中的所有邮件)
+A05 Search new           #查询收件箱所有新邮件
+* OK X-SEARCH in progress
+* OK X-SEARCH in progress
+* OK X-SEARCH in progress
+* SEARCH
+A05 OK SEARCH completed            #找不到任何新邮件
+A06 Fetch 5 full         #获取第5封邮件的邮件头
+* 5 FETCH (INTERNALDATE "27-Jun-2006 14:00:27 +0800" FLAGS (\Seen) ENVELOPE ("Tue, 27 Jun 2006 13:56:51 +0800" "test " (("xxxxxx" NIL "xxxx" "xxxxxx")) (("xxxxxx" NIL "xxxx" "xxxxxx")) (("xxxxxx" NIL "xxxx" "xxxxxx")) ((NIL NIL "xxx" "xxxxx")) NIL NIL NIL "<000f01c699ae$7c5014a0$6b01a8c0@xxxxxx.xx>") BODY (("text" "plain" ("charset" "gb2312") NIL NIL "base64" 14 2) ("text" "html" ("charset" "gb2312") NIL NIL "base64" 420 7) "alternative") RFC822.SIZE 1396)
+A06 OK Fetch completed
+A07 Fetch 5 rfc822       #获取第5封邮件的完整内容
+* 5 FETCH (RFC822 {1396}
+[这里是邮件内容，太长，略...]
+A07 OK Fetch completed
+A08 Fetch 5 flags        #查询第5封邮件的标志位
+A08 OK Fetch completed
+A09 Store 5 +flags.silent (\deleted)          #设置标志位为删除
+A09 OK STORE completed
+A10 Expunge              #永久删除当前邮箱INBOX中所有设置了\deleted标志的信件
+A10 OK EXPUNGE completed
+A11 noop                  # 空语句
+A11 OK NOOP completed
+
+
+A20 LOGOUT               #退出
+* BYE IMAP4rev1 Server logging out
+A20 OK LOGOUT completed
+Connection closed by foreign host.
+[crazywill@localhost crazywill]$
