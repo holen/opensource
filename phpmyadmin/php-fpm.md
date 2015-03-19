@@ -68,3 +68,5 @@ php.ini
     display_errors = off
     open_basedir = /data/apache2/:/tmp/ #将用户可操作的文件限制在某目录下
     chroot = /data/apache2/ #把指定的网站完完全全限制在一个目录下
+
+[文献](http://stackoverflow.com/questions/21594090/fastcgi-aborted-select-failed/21595677#21595677)
