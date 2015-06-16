@@ -57,5 +57,6 @@ edit /etc/samba/smbusers
 
 set passwd for user
 
+    useradd tomcat6
     smbpasswd -a tomcat6
     smbpasswd -x tomcat6 -- delete 
