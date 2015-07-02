@@ -252,3 +252,4 @@ server
 [elasticsearch_download](http://www.elasticsearch.org/download)  
 [logstash_doc](http://logstash.net/docs/1.4.2/)  
 [ Kibana+Logstash+Elasticsearch 日志查询系统](http://enable.blog.51cto.com/747951/1049411)  
+[kibana中文指南](http://kibana.logstash.es/content/)  

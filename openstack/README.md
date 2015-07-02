@@ -1,4 +1,4 @@
-# Install openstack all on one single vm on Ubuntu 14.04.2 LTS
+# Install openstack all on one single vm base on Ubuntu 14.04.2 LTS
 
 add user
 

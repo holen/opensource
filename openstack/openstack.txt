@@ -1,0 +1,87 @@
+# OpenStack项目
+
+
+    --------------------------------------
+    |        管理界面 Horizon            |   计费
+    --------------------------------------   Ceilometer
+    |  计算      |   存储    |   网络    |
+    | Compute    | Storing   | Netutron  |   模板制作
+    |            |           |           |   Heat
+    |  Nova      |  Cinder   |  Quantum  |
+    |            |           |           |   数据库服务
+    |  Glance    |  Swift    |           |   Trove
+    --------------------------------------
+    |        身份认证Keystone            |   
+    --------------------------------------
+
+Other:  
+
+        祼机部署服务(Ironic)
+        队列和通知服务(Marconi)
+        域名服务(Moniker)
+        工作流服务(Convection)
+        Hadoop服务(savanna)
+
+# OpenStack核心项目
+
+    Compute     ---->       Nova
+
+    Storage     ---->       Swift(Objects)
+                 |          Cinder(Block)
+                ---->       Glance(Images)
+
+    Identity    ---->       keystone
+
+    Network     ---->       Neutron
+
+# services 
+
+Nova--计算服务
+
+    实例生命周期管理
+    提供基于REST API
+    Hypervisor屏蔽，支持KVM, Xen, Hyper-v, Docker e.g.
+    支持大规模水平伸缩
+
+Neutron--网络服务
+
+    虚拟网络管理
+    面向租房的网络管理(SDN)
+    高度可配置的plug-in架构
+    基于REST的API
+
+Keystone--身份认证服务
+
+    认证与授权
+    用户、租房和角色管理
+    服务目录管理
+    支持多认证机制(Mysql, Ldap, AD e.g)    
+
+Glance--镜像服务
+
+    镜像注册、查询
+    基于角色的访问控制
+    支持多格式的镜像(raw, qcow2 e.g)
+    支持多种后端存储(S3, Swift, File system e.g.)
+
+Cinder--块存储服务
+
+    提供类似EBS的块存储
+    减少Nova的复杂性，降低Nova的负载
+    支持多种后端存储 
+
+Swift--对象存储服务
+
+    可靠对象存储
+    没有容量限制
+    无闪单点故障
+    支持S3 API
+
+HEAT--编排服务
+
+    模板定义环境
+    云资源拓扑与编排服务    
+    兼容AWF CloudFormation
+
+
+
