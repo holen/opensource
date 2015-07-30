@@ -1,0 +1,3 @@
+数据流向
+
+    Data -> obj -> PG -> Pool -> OSD

@@ -47,6 +47,12 @@ Modify the config file --> /etc/mysql/my.cnf
     long_query_time         = 2
     log-queries-not-using-indexes
     max_error_count = 65535 
+    #############
+    default-storage-engine = innodb
+    innodb_file_per_table
+    collation-server = utf8_general_ci
+    init-connect = 'SET NAMES utf8'
+    character-set-server = utf8
 
 Modify chroot --> /etc/apparmor.d/usr.sbin.mysqld
 

@@ -31,3 +31,24 @@ vim /home/stack/start.sh
 run
 
     su -l stack ./start.sh
+
+# all in one machine
+
+    [[local|localrc]]
+    HOST_IP=10.0.220.1
+    FLOATING_RANGE=10.0.220.192/27
+    FIXED_RANGE=10.11.12.0/24
+    FIXED_NETWORK_SIZE=254
+    FLAT_INTERFACE=em2
+    PUBLIC_INTERFACE=em1
+    ADMIN_PASSWORD=stackpwd
+    MYSQL_PASSWORD=stackpwd
+    RABBIT_PASSWORD=stackpwd
+    SERVICE_PASSWORD=stackpwd
+    SERVICE_TOKEN=c2a27322b7b2fb8b9732
+    
+    LOGFILE=$DEST/logs/stack.sh.log
+    
+    LOGDAYS=2
+    
+    disable_service tempest

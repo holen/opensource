@@ -1,0 +1,51 @@
+create zhl project, zhl user, and attach to user role
+
+    source admin-openrc.sh 
+    openstack project create --description "zhl Project" zhl
+    openstack user create --password-prompt zhl
+    openstack role add --project zhl --user zhl user
+
+vim zhl-openrc.sh
+
+    export OS_PROJECT_DOMAIN_ID=default
+    export OS_USER_DOMAIN_ID=default
+    export OS_PROJECT_NAME=zhl
+    export OS_TENANT_NAME=zhl
+    export OS_USERNAME=zhl
+    export OS_PASSWORD=abcd1234
+    export OS_AUTH_URL=http://controller:5000/v3
+    export OS_IMAGE_API_VERSION=2
+    export OS_VOLUME_API_VERSION=2
+
+boot a instance
+
+    source zhl-openrc.sh
+    neutron subnet-list
+    nova keypair-list
+    nova keypair-add --pub-key /root/.ssh/id_rsa.pub zhl-key
+    nova keypair-list
+    nova flavor-list
+    nova image-list
+    nova net-list
+    nova secgroup-list
+    nova boot --flavor m1.tiny --image cirros-0.3.4-x86_64 --nic net-id=0f3e3633-ac35-497a-95f9-550c60289dd2 --security-group default --key-name zhl-key zhl-vm1
+    nova list 
+    nova get-vnc-console zhl-vm1 novnc
+
+access my instance remotely
+
+    nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
+    nova secgroup-add-rule default tcp 22 22 0.0.0.0/0
+
+associate the floating IP address with my instance
+
+    neutron floatingip-create ext-net
+    nova floating-ip-associate zhl-vm1 10.0.88.116
+
+attach a block storage volume to my instance
+
+    nova list 
+    nova volume-list
+    nova volume-attach zhl-vm1 volume-id
+    nova volume-list
+

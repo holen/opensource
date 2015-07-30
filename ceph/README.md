@@ -156,8 +156,8 @@ Zap a disk in preparation
     
 Use ceph-deploy to copy the configuration file and admin eky to your admin node and your ceph nodes 
 
-    ceph-deploy admin node1 node2 node3 
     sudo chmod +r /etc/ceph/ceph.client.admin.keyring
+    ceph-deploy admin node1 node2 node3 
 
 Check your cluster's health
 
@@ -343,7 +343,7 @@ Stroing/Retrieving object data
     
     Exercise:
     $rados put {object-name} {file-path} --pool=data
-    $rados put test-object-q testfile.txt --pool=data
+    $rados put test-object-1 testfile.txt --pool=data
     $rados -p data ls 
     root@node1:~/my-cluster# ceph osd map data test-object-1
     osdmap e29 pool 'data' (0) object 'test-object-1' -> pg 0.74dc35e2 (0.22) -> up ([3,2,1], p3) acting ([3,2,1], p3)
