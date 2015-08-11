@@ -49,3 +49,7 @@ attach a block storage volume to my instance
     nova volume-attach zhl-vm1 volume-id
     nova volume-list
 
+http://www.ibm.com/developerworks/cn/cloud/library/1209_zhanghua_openstacknetwork/#icomments
+http://www.uml.org.cn/yunjisuan/201501124.asp
+https://www.rdoproject.org/Networking_in_too_much_detail
+http://docs.openstack.org/openstack-ops/content/network_troubleshooting.html
