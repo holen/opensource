@@ -1,4 +1,10 @@
 # Redis
+Prepare
+
+    echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
+    sysctl vm.overcommit_memory=1
+    echo never > /sys/kernel/mm/transparent_hugepage/enabled
+
 Install 
 
     $ wget http://download.redis.io/releases/redis-2.8.9.tar.gz
@@ -507,4 +513,15 @@ client
     ZRANK key member
     ZRERANK key member
     
+大量插入数据
+
+    vim data.txt
+    set key0 0
+    set key1 1
+    set key2 2 
+    cat data.txt | redis-cli --pipe
+
+分区
+    
+    http://www.blogjava.net/zhanglongsr/archive/2014/07/15/415770.html
 

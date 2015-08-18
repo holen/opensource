@@ -50,3 +50,4 @@ slave
 
     requirepass TAFK(@~!jiXALQ
     
+http://www.cnblogs.com/stephen-liu74/archive/2012/04/11/2370521.html
