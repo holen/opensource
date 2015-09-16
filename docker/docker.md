@@ -87,3 +87,4 @@ Get started with Docker Hub
     docker pull centos
     docker push yourname/newimage
     
+# git clone https://git.oschina.net/dockerf/docker-training.git
