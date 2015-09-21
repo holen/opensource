@@ -25,6 +25,7 @@ Hello world
 An interactive container
 
     docker run -t -i ubuntu:14.04 /bin/bash
+    docker exec -it website /bin/bash
 
 Run a daemonized Hello world
 
