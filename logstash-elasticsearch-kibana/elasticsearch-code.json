@@ -1,0 +1,597 @@
+PUT /megacorp/employee/1
+{
+    "first_name" : "John",
+    "last_name" :  "Smith",
+    "age" :        25,
+    "about" :      "I love to go rock climbing",
+    "interests": [ "sports", "music" ]
+}
+PUT /megacorp/employee/2
+{
+    "first_name" :  "Jane",
+    "last_name" :   "Smith",
+    "age" :         32,
+    "about" :       "I like to collect rock albums",
+    "interests":  [ "music" ]
+}
+
+PUT /megacorp/employee/3
+{
+    "first_name" :  "Douglas",
+    "last_name" :   "Fir",
+    "age" :         35,
+    "about":        "I like to build cabinets",
+    "interests":  [ "forestry" ]
+}
+
+GET /megacorp/employee/1
+
+GET /megacorp/employee/_search
+
+GET /megacorp/employee/_search?q=last_name:Smith
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "range" : {
+                    "age" : { "gt" : 30 }
+                }
+            },
+            "query" : {
+                "match" : {
+                    "last_name" : "smith"
+                }
+            }
+        }
+    }
+}
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match" : {
+            "about" : "rock climbing"
+        }
+    }
+}
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match_phrase" : {
+            "about" : "rock climbing"
+        }
+    }
+}
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match_phrase" : {
+            "about" : "rock climbing"
+        }
+    },
+    "highlight": {
+        "fields" : {
+            "about" : {}
+        }
+    }
+}
+
+GET /megacorp/employee/_search
+{
+  "aggs": {
+    "all_interests": {
+      "terms": { "field": "interests" }
+    }
+  }
+}
+
+GET /megacorp/employee/_search
+{
+  "query": {
+    "match": {
+      "last_name": "smith"
+    }
+  },
+  "aggs": {
+    "all_interests": {
+      "terms": {
+        "field": "interests"
+      }
+    }
+  }
+}
+
+GET /megacorp/employee/_search
+{
+    "aggs" : {
+        "all_interests" : {
+            "terms" : { "field" : "interests" },
+            "aggs" : {
+                "avg_age" : {
+                    "avg" : { "field" : "age" }
+                }
+            }
+        }
+    }
+}
+
+GET /_cluster/health
+
+PUT /blogs
+{
+   "settings" : {
+      "number_of_shards" : 3,
+      "number_of_replicas" : 1
+   }
+}
+
+PUT /website/blog/123
+{
+  "title": "My first blog entry",
+  "text":  "Just trying this out...",
+  "date":  "2014/01/01"
+}
+
+POST /website/blog/
+{
+  "title": "My second blog entry",
+  "text":  "Still trying this out...",
+  "date":  "2014/01/01"
+}
+
+GET /website/blog/123?pretty
+
+GET /website/blog/123?_source=title,text
+
+GET /website/blog/123/_source
+
+GET /_mget
+{
+   "docs" : [
+      {
+         "_index" : "website",
+         "_type" :  "blog",
+         "_id" :    123
+      },
+      {
+         "_index" : "website",
+         "_type" :  "pageviews",
+         "_id" :    1,
+         "_source": "views"
+      }
+   ]
+}
+
+GET /website/blog/_mget
+{
+   "docs" : [
+      { "_id" : 123 },
+      { "_type" : "pageviews", "_id" :   1 }
+   ]
+}
+
+POST /_bulk
+{ "create": { "_index": "website", "_type": "blog", "_id": "123" }}
+{ "title":    "Cannot create - it already exists" }
+{ "index":  { "_index": "website", "_type": "blog", "_id": "123" }}
+{ "title":    "But we can update it" }
+
+GET /_search
+
+GET /blogs/_search
+
+GET /_search?size=5
+GET /_search?size=5&from=5
+GET /_search?size=5&from=10
+
+GET /_search?q=%2Bfirst_name%3Ajohn+%2Babout%3climbing
+
+GET /_search?q=johng$
+
+GET /_search?q=Jane
+
+GET /_analyze?analyzer=standard 
+{ Text to analyze }
+
+GET /website/_mapping/blog
+
+GET /megacorp/_mapping/employee
+
+PUT /gb
+{
+  "mappings": {
+    "tweet" : {
+      "properties" : {
+        "tweet" : {
+          "type" :    "string",
+          "analyzer": "english"
+        },
+        "date" : {
+          "type" :   "date"
+        },
+        "name" : {
+          "type" :   "string"
+        },
+        "user_id" : {
+          "type" :   "long"
+        }
+      }
+    }
+  }
+}
+
+PUT /gb/_mapping/tweet
+{
+  "properties" : {
+    "tag" : {
+      "type" :    "string",
+      "index":    "not_analyzed"
+    }
+  }
+}
+
+GET /gb/_analyze?field=tweet 
+{ Black-cats }
+
+GET /gb/_analyze?field=tag 
+{ Black-cats }
+
+GET /_search?_primary
+{}
+
+GET /index_2014*/type1,type2/_search
+
+GET /_search
+{
+  "from": 30,
+  "size": 10
+}
+
+POST /_search
+{
+  "from": 30,
+  "size": 10
+}
+
+GET /_search
+{
+    "query": {
+        "match_all": {}
+    }
+}
+
+GET /_search
+{
+    "query": {
+        "match": {
+            "last_name": "Smith"
+        }
+    }
+}
+
+GET /_search?explaint
+{
+    "query": {
+        "filtered": {
+            "query":  { "match": { "last_name": "Smith" }},
+            "filter": { "term": { "first_name": "john" }}
+        }
+    }
+}
+
+GET /_search
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "term" : {
+                    "about" : "albums"
+                }
+            }
+        }
+    }
+}
+
+GET /_search?explain
+{
+   "query"   : { "match" : { "last_name" : "smith" }}
+}
+
+GET /us/tweet/12/_explain
+{
+   "query" : {
+      "filtered" : {
+         "filter" : { "term" :  { "user_id" : 2           }},
+         "query" :  { "match" : { "tweet" :   "honeymoon" }}
+      }
+   }
+}
+
+PUT /my_temp_index
+{
+    "settings": {
+        "number_of_shards" :   1,
+        "number_of_replicas" : 0
+    }
+}
+
+PUT /my_temp_index/_settings
+{
+    "number_of_replicas": 1
+}
+
+PUT /my_index
+{
+    "settings": {
+        "analysis": {
+            "char_filter": {
+                "&_to_and": {
+                    "type":       "mapping",
+                    "mappings": [ "&=> and "]
+            }},
+            "filter": {
+                "my_stopwords": {
+                    "type":       "stop",
+                    "stopwords": [ "the", "a" ]
+            }},
+            "analyzer": {
+                "my_analyzer": {
+                    "type":         "custom",
+                    "char_filter":  [ "html_strip", "&_to_and" ],
+                    "tokenizer":    "standard",
+                    "filter":       [ "lowercase", "my_stopwords" ]
+            }}
+}}}
+
+GET /my_index/_analyze?analyzer=my_analyzer
+{ The quick & brown fox }
+
+PUT /spanish_docs
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "es_std": {
+                    "type":      "standard",
+                    "stopwords": "_spanish_"
+                }
+            }
+        }
+    }
+}
+
+GET /spanish_docs/_analyze?analyzer=es_std
+{ El veloz zorro marrón }
+
+DELETE /my_index
+
+PUT /my_index
+{
+    "mappings": {
+        "my_type": {
+            "dynamic":      "strict",
+            "properties": {
+                "title":  { "type": "string"},
+                "stash":  {
+                    "type":     "object",
+                    "dynamic":  true
+                }
+            }
+        }
+    }
+}
+
+PUT /my_index/my_type/1
+{
+    "title":   "This doc adds a new field",
+    "stash": { "new_field": "Success!" }
+}
+
+PUT /my_index/my_type/1
+{
+    "title":     "This throws a StrictDynamicMappingException",
+    "new_field": "Fail!"
+}
+
+# chap 12
+
+POST /my_store/products/_bulk
+{ "index": { "_id": 1 }}
+{ "price" : 10, "productID" : "XHDK-A-1293-#fJ3" }
+{ "index": { "_id": 2 }}
+{ "price" : 20, "productID" : "KDKE-B-9947-#kL5" }
+{ "index": { "_id": 3 }}
+{ "price" : 30, "productID" : "JODL-X-1937-#pV7" }
+{ "index": { "_id": 4 }}
+{ "price" : 30, "productID" : "QQPX-R-3956-#aD8" }
+
+GET /my_store/products/_search
+{
+    "query" : {
+        "filtered" : { 
+            "query" : {
+                "match_all" : {}
+            },
+            "filter" : {
+                "term" : {
+                    "price" : 20
+                }
+            }
+        }
+    }
+}
+
+GET /my_store/products/_search
+{
+    "query" : {
+        "filtered" : {
+            "query" : {
+                "match_all" : {}
+            },
+            "filter" : {
+                "term" : {
+                    "productID" : "XHDK-A-1293-#fJ3"
+                }
+            }
+        }
+    }
+}
+
+GET /my_store/_analyze?field=productID
+{ XHDK-A-1293-#fJ3 }
+
+DELETE /my_store
+
+PUT /my_store
+{
+    "mappings" : {
+        "products" : {
+            "properties" : {
+                "productID" : {
+                    "type" : "string",
+                    "index" : "not_analyzed"
+                }
+            }
+        }
+    }
+
+}
+
+POST /my_store/products/_bulk
+{ "index": { "_id": 1 }}
+{ "price" : 10, "productID" : "XHDK-A-1293-#fJ3" }
+{ "index": { "_id": 2 }}
+{ "price" : 20, "productID" : "KDKE-B-9947-#kL5" }
+{ "index": { "_id": 3 }}
+{ "price" : 30, "productID" : "JODL-X-1937-#pV7" }
+{ "index": { "_id": 4 }}
+{ "price" : 30, "productID" : "QQPX-R-3956-#aD8" }
+
+GET /my_store/products/_search
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "term" : {
+                    "productID" : "XHDK-A-1293-#fJ3"
+                }
+            }
+        }
+    }
+}
+
+GET /my_store/products/_search
+{
+   "query" : {
+      "filtered" : {
+         "filter" : {
+            "bool" : {
+              "should" : [
+                 { "term" : {"price" : 20}},
+                 { "term" : {"productID" : "XHDK-A-1293-#fJ3"}}
+              ],
+              "must_not" : {
+                 "term" : {"price" : 30}
+              }
+           }
+         }
+      }
+   }
+}
+
+GET /my_store/products/_search
+{
+   "query" : {
+      "filtered" : {
+         "filter" : {
+            "bool" : {
+              "should" : [
+                { "term" : {"productID" : "KDKE-B-9947-#kL5"}},
+                { "bool" : {
+                  "must" : [
+                    { "term" : {"productID" : "JODL-X-1937-#pV7"}},
+                    { "term" : {"price" : 30}}
+                  ]
+                }}
+              ]
+           }
+         }
+      }
+   }
+}
+
+GET /my_store/products/_search
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "terms" : {
+                    "price" : [20, 30]
+                }
+            }
+        }
+    }
+}
+
+GET /my_store/products/_search
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "range" : {
+                    "price" : {
+                        "gte" : 20,
+                        "lt"  : 40
+                    }
+                }
+            }
+        }
+    }
+}
+
+POST /my_index/posts/_bulk
+{ "index": { "_id": "1"              }}
+{ "tags" : ["search"]                }
+{ "index": { "_id": "2"              }}
+{ "tags" : ["search", "open_source"] }
+{ "index": { "_id": "3"              }}
+{ "other_field" : "some data"        }
+{ "index": { "_id": "4"              }}
+{ "tags" : null                      }
+{ "index": { "_id": "5"              }}
+{ "tags" : ["search", null]          }
+
+GET /my_index/posts/_search
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "exists" : { "field" : "tags" }
+            }
+        }
+    }
+}
+
+GET /my_index/posts/_search
+{
+    "query" : {
+        "filtered" : {
+            "filter": {
+                "missing" : { "field" : "tags" }
+            }
+        }
+    }
+}
