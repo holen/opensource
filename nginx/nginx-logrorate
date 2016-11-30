@@ -1,0 +1,15 @@
+/data/nginx/log/*.log {
+        daily
+        minsize 10M
+        rotate 7
+        compress
+        dateext
+	delaycompress
+	notifempty
+        sharedscripts
+        postrotate
+        if [ -f /opt/nginx/var/run/nginx.pid ]; then
+                kill -USR1 `cat /opt/nginx/var/run/nginx.pid`
+        fi
+        endscript
+}

@@ -1,0 +1,116 @@
+# ======================== Elasticsearch Configuration =========================
+#
+# NOTE: Elasticsearch comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please see the documentation for further information on configuration options:
+# <https://www.elastic.co/guide/en/elasticsearch/reference/5.0/settings.html>
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+# Use a descriptive name for your cluster:
+#
+cluster.name: holen
+#
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+#
+node.name: node1
+#
+# Add custom attributes to the node:
+#
+node.attr.rack: r1
+#
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+path.data: /data/elasticsearch-5.0.1/data
+#
+# Path to log files:
+#
+path.logs: /data/elasticsearch-5.0.1/logs
+#
+# ----------------------------------- Memory -----------------------------------
+#
+# Lock the memory on startup:
+#
+bootstrap.memory_lock: true
+#
+# Make sure that the heap size is set to about half the memory available
+# on the system and that the owner of the process is allowed to use this
+# limit.
+#
+# Elasticsearch performs poorly when the system is swapping the memory.
+#
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+#
+network.host: 0.0.0.0
+#
+# Set a custom port for HTTP:
+#
+http.port: 9200
+#
+# For more information, see the documentation at:
+# <https://www.elastic.co/guide/en/elasticsearch/reference/5.0/modules-network.html>
+#
+# --------------------------------- Discovery ----------------------------------
+#
+# Pass an initial list of hosts to perform discovery when new node is started:
+# The default list of hosts is ["127.0.0.1", "[::1]"]
+#
+#discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+#
+# Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
+#
+#discovery.zen.minimum_master_nodes: 3
+#
+# For more information, see the documentation at:
+# <https://www.elastic.co/guide/en/elasticsearch/reference/5.0/modules-discovery-zen.html>
+#
+# ---------------------------------- Gateway -----------------------------------
+#
+# Block initial recovery after a full cluster restart until N nodes are started:
+#
+gateway.recover_after_nodes: 1
+#
+# For more information, see the documentation at:
+# <https://www.elastic.co/guide/en/elasticsearch/reference/5.0/modules-gateway.html>
+#
+# ---------------------------------- Various -----------------------------------
+#
+# Require explicit names when deleting indices:
+#
+#action.destructive_requires_name: true
+
+# Enable Auditing to keep track of attempted and successful interactions with your Elasticsearch cluster
+xpack.security.audit.enabled: true
+xpack.security.audit.outputs: [ index, logfile ]
+
+xpack.security.audit.logfile.events.include: access_denied, access_granted, anonymous_access_denied, authentication_failed, connection_denied, tampered_request, run_as_denied, run_as_granted
+xpack.security.audit.index.bulk_size: 1000
+xpack.security.audit.index.flush_interval: 1s
+xpack.security.audit.index.rollover: daily
+xpack.security.audit.index.events.include: anonymous_access_denied, authentication_failed, realm_authentication_failed, access_granted, access_denied, tampered_request, connection_granted, connection_denied, run_as_granted, run_as_denied
+
+action.auto_create_index: .security,.security_audit_log*,.monitoring*,.watches,.triggered_watches,.watcher-history*
+
+xpack.notification.email.account:
+  work:
+    profile: sinamail
+    email_defaults:
+      from: changeme@sina.com
+    smtp:
+      auth: true
+      starttls.enable: true
+      host: smtp.sina.com
+      port: 25
+      user: changeme
+      password: changeme

@@ -1,6 +1,6 @@
-# elasticsearch logstash kibana redis 
-one machine install soft: jdk logstash kibana apache redis elasticsearch  
-another machine install soft: jdk logstash 
+# elasticsearch logstash kibana redis
+one machine install soft: jdk logstash kibana apache redis elasticsearch
+another machine install soft: jdk logstash
 ## Install java
 
     download jdk-7u51-linux-x64.tar.gz
@@ -13,16 +13,18 @@ another machine install soft: jdk logstash
     export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
 
     source /etc/profile
-    java -version 
+    java -version
 
-    echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf 
-    #指定了内核针对内存分配的策略，其值可以是0、1、2 
-    sysctl -p 
+    echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
+    #指定了内核针对内存分配的策略，其值可以是0、1、2
+    sysctl -p
 
 ## Install redis
 Download and install
 
     apt-get install make gcc
+    echo never > /sys/kernel/mm/transparent_hugepage/enabled
+    echo 511 > /proc/sys/net/core/somaxconn
     wget http://download.redis.io/releases/redis-2.8.13.tar.gz
     tar zxvf redis-2.8.13.tar.gz
     cd redis-2.8.13
@@ -43,7 +45,7 @@ start shell
     wget https://github.com/ijonas/dotfiles/raw/master/etc/init.d/redis-server
     mv redis-server ./bin/
 
-configure 
+configure
 
     vim /data/redis/etc/redis.conf
         daemonize yes
@@ -56,7 +58,7 @@ configure
         dir /data/redis/db/
         activerehashing yes
 
-grant 
+grant
 
     ln -s /data/redis/bin/redis-server /etc/init.d/redis-server
     ln -s /data/redis/etc/redis.conf /etc/redis.conf
@@ -74,7 +76,7 @@ test
     redis-cli get foo
     redis-cli keys '*'
     redis-cli llen logstash
-    redis-cli lrange logstash 0 1 
+    redis-cli lrange logstash 0 1
     redis-cli lpop logstash
 
 ## Install elasticsearch
@@ -88,9 +90,9 @@ test
 test
 
     curl localhost:9200/_search?pretty=true
-    curl -XDELETE localhost:9200/logstash-2014.02.17 
-    curl -s http://127.0.0.1:9200/_status?pretty=true | grep logstash              
-    curl -gs -XGET "http://localhost:9200/logstash-*/_search?pretty&q=type:example" 
+    curl -XDELETE localhost:9200/logstash-2014.02.17
+    curl -s http://127.0.0.1:9200/_status?pretty=true | grep logstash
+    curl -gs -XGET "http://localhost:9200/logstash-*/_search?pretty&q=type:example"
 
 ## Install kibana
 Install apache
@@ -106,7 +108,7 @@ Install apache
             DocumentRoot /data/www/kibana
             ServerName kibana
             <Directory />
-                    Options  Indexes  FollowSymLinks  +Includes  
+                    Options  Indexes  FollowSymLinks  +Includes
                     AllowOverride All
                     Order deny,allow
                     Deny from all
@@ -144,7 +146,7 @@ Download logstash
 
 Write apache log to redis db on client
 
-    vim logstash.apache.conf 
+    vim logstash.apache.conf
     input {
         file {
             type => 'apache-access'
@@ -152,9 +154,9 @@ Write apache log to redis db on client
         }
     }
     filter {
-      grok { 
+      grok {
         type => "apache-access"
-        pattern => "%{COMBINEDAPACHELOG}" 
+        pattern => "%{COMBINEDAPACHELOG}"
       }
     }
     output {
@@ -168,7 +170,7 @@ Write apache log to redis db on client
 
 start
 
-    java -jar /data/logstash-1.3.3-flatjar.jar agent -f /data/logstash.index.conf -verbose &  
+    java -jar /data/logstash-1.3.3-flatjar.jar agent -f /data/logstash.index.conf -verbose &
 
 Write to kibana(web) on server
 
@@ -182,55 +184,55 @@ Write to kibana(web) on server
                     type => "redis-input"
             }
     }
-    
+
     output {
             elasticsearch_http {
                     host => "10.0.140.75"
                     port => "9200"
             }
-    } 
+    }
 
-## access 
+## access
 
     http://yourserver:9200
 
 ## rsyslog
-client 
+client
 
     apt-get update
     apt-get install rsyslog
-    
+
     #send log to 10.0.140.75
     vim /etc/rsyslog.d/50-default.conf
     *.* @10.0.140.75
-    /etc/init.d/rsyslog restart 
+    /etc/init.d/rsyslog restart
 
-server 
+server
 
     apt-get update
     apt-get install rsyslog
-    
+
     #open udp514 port,allow 10.0.140.0/24 access
     vim /etc/rsyslog.conf
     $ModLoad immark
     $ModLoad imudp
     $UDPServerRun 514
     $AllowedSender UDP, 127.0.0.1, 10.0.140.0/24
-    
+
     vim /etc/default/rsyslog
     RSYSLOGD_OPTIONS="-c5 -r -x"
-    
+
     #定义rsyslog模板,带客户机ip
     vim /etc/rsyslog.d/50-default.conf
-    
-    $template myFormat, "%fromhost-ip% %rawmsg%\n" 
+
+    $template myFormat, "%fromhost-ip% %rawmsg%\n"
     *.* /data/rsyslog.log;myFormat
-    
+
     /etc/init.d/rsyslog restart
-    
+
     ####日志轮转
     vim /etc/logrotate.d/rsyslog
-    
+
     /data/rsyslog*.log
     {
       rotate 7
@@ -246,10 +248,10 @@ server
       endscript
     }
 
-## 参考文献： 
+## 参考文献：
 
-[grokdebug](http://grokdebug.herokuapp.com/)  
-[elasticsearch_download](http://www.elasticsearch.org/download)  
-[logstash_doc](http://logstash.net/docs/1.4.2/)  
-[ Kibana+Logstash+Elasticsearch 日志查询系统](http://enable.blog.51cto.com/747951/1049411)  
-[kibana中文指南](http://kibana.logstash.es/content/)  
+[grokdebug](http://grokdebug.herokuapp.com/)
+[elasticsearch_download](http://www.elasticsearch.org/download)
+[logstash_doc](http://logstash.net/docs/1.4.2/)
+[ Kibana+Logstash+Elasticsearch 日志查询系统](http://enable.blog.51cto.com/747951/1049411)
+[kibana中文指南](http://kibana.logstash.es/content/)
