@@ -4,6 +4,7 @@
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.1.tar.gz
 
 ##Require(https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html#sysconfig)
+  
 vim /etc/security/limits.conf
 
     * soft nofile 65536
