@@ -43,3 +43,7 @@
 ## loading the kibana index pattern
 
     /usr/share/filebeat/scripts/import_dashboards -es http://10.30.4.130:9200 -user elastic -pass qianbitou2017 -only-index
+
+## Importing Existing Beat Dashboards 
+
+    /usr/share/filebeat/scripts/import_dashboards -es http://10.30.4.130:9200 -user elastic -pass qianbitou2017 -only-dashboards

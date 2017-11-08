@@ -1,0 +1,21 @@
+- name: Create directory
+  file: path=/opt/zabbix_install state=directory mode=0755
+- name: Add group zabbix
+  group: name=zabbix state=present
+- name: Create zabbix user
+  user: name=zabbix group=zabbix shell=/sbin/nologin comment="Zabbix Agent" append=yes
+- name: Unarchive zabbix source code 
+  unarchive: src=http://ops.qianbitou.cn/zabbix/zabbix-3.4.3.tar.gz dest=/opt/zabbix_install remote_src=yes
+- name: Compile zabbix agent
+  command: ./configure --prefix=/usr/local/zabbix --enable-agent
+  args: 
+    chdir: /opt/zabbix_install/zabbix-3.4.3/
+    creates: /usr/local/zabbix
+- name: Make install
+  command: make install
+  args: 
+    chdir: /opt/zabbix_install/zabbix-3.4.3/
+- name: Zabbix agentd conf
+  template: src=zabbix_agentd.conf.j2 dest=/usr/local/zabbix/etc/zabbix_agentd.conf
+- name: Start zabbix
+  command: /usr/local/zabbix/sbin/zabbix_agentd

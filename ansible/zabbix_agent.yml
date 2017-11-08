@@ -1,0 +1,4 @@
+- hosts: zabbix
+  user: root
+  roles:
+    - zabbix_agent

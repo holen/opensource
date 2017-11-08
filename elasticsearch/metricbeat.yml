@@ -1,0 +1,88 @@
+###################### Metricbeat Configuration Example #######################
+
+# This file is an example configuration file highlighting only the most common
+# options. The metricbeat.full.yml file from the same directory contains all the
+# supported options with more comments. You can use it as a reference.
+#
+# You can find the full configuration reference here:
+# https://www.elastic.co/guide/en/beats/metricbeat/index.html
+
+#==========================  Modules configuration ============================
+metricbeat.modules:
+
+#------------------------------- System Module -------------------------------
+- module: system
+  metricsets:
+    # CPU stats
+    - cpu
+
+    # System Load stats
+    - load
+
+    # Per CPU core stats
+    #- core
+
+    # IO stats
+    #- diskio
+
+    # Per filesystem stats
+    - filesystem
+
+    # File system summary stats
+    - fsstat
+
+    # Memory stats
+    - memory
+
+    # Network stats
+    - network
+
+    # Per process stats
+    - process
+
+    # Sockets (linux only)
+    #- socket
+  enabled: true
+  period: 60s
+  processes: ['.*']
+
+# -------------------------------- Nginx Module -------------------------------
+- module: nginx
+  metricsets: ["stubstatus"]
+  enabled: true
+  period: 60s
+
+  # Nginx hosts
+  hosts: ["http://my.qianbitou.cn"]
+
+  # Path to server status. Default server-status
+  server_status_path: "ngx_status"
+
+# ------------------------------- php_fpm Module ------------------------------
+- module: php_fpm
+  metricsets: ["pool"]
+  enabled: true
+  period: 60s
+  status_path: "/status"
+  hosts: ["my.qianbitou.cn"]
+
+#================================ Outputs =====================================
+
+# Configure what outputs to use when sending the data collected by the beat.
+# Multiple outputs may be used.
+
+#-------------------------- Elasticsearch output ------------------------------
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["10.30.4.130:9200"]
+
+  # Optional protocol and basic auth credentials.
+  #protocol: "https"
+  username: "elastic"
+  password: "qianbitou2017"
+  index: "metricbeat-%{+yyyy.MM.dd}"
+  template.enabled: true
+  template.name: "metric"
+  template.path: "${path.config}/metricbeat.template.json"
+  template.overwrite: false
+
