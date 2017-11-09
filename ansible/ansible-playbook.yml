@@ -1,0 +1,2 @@
+ansible-playbook -i /etc/ansible/hosts zabbix_agent.yml -verbose
+
