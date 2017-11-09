@@ -1,0 +1,11 @@
+pt-ioprofile的原理是对某个pid附加一个strace进程进行IO分析
+
+通过pt-ioprofile查看哪个文件的IO占用时间最多。
+
+默认参数下该工具展示的是IO占用的时间。
+
+eg: pt-ioprofile --profile-pid=3241  //统计时间
+
+对于定位问题更有用的是通过IO的吞吐量来进行定位。使用参数 --cell=sizes，该参数将结果已 B/s 的方式展示出来
+
+eg: pt-ioprofile --profile-pid=3241 --cell=sizes  //统计吞吐量
