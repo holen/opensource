@@ -1,0 +1,13 @@
+# 查看httpd进程使用了多少内存
+ps aux | grep 'nginx' | awk '{print $6/1024 " MB";}'
+
+# 查看php各pool线程占用的内存
+ps aux | grep 'php-fpm' | awk '{print $6/1024 " "$13;}' | awk '{sum[$2] += $1} END {for(i in sum){print i, sum[i] "M"}}'
+
+ps aux | grep 'php-fpm' | awk '{print $3" "$13;}' | awk '{sum[$2] += $1} END {for(i in sum){print i, sum[i]}}'
+
+# 找出当前系统内存使用量较高的进程
+ps -aux | sort -rnk 4 | head -20
+
+# 找出当前系统CPU使用量较高的进程
+ps -aux | sort -rnk 3 | head -20

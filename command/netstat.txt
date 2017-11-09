@@ -1,0 +1,7 @@
+查看tcp连接状态
+
+	netstat -nat |awk '{print $6}'|sort|uniq -c|sort -rn
+
+查看80端口请求数量最高的20个IP
+
+	netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20

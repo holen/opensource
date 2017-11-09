@@ -1,0 +1,8 @@
+#匹配行前加
+sed -i '/allow 361way.com/iallow www.361way.com' the.conf.file
+#匹配行后加
+sed -i '/allow 361way.com/aallow www.361way.com' the.conf.file
+
+而在书写的时候为便与区分，往往会在i和a前面加一个反加一个反斜扛 。代码就变成了：
+sed -i '/2222222222/a\3333333333' test.txt
+sed -i '/2222222222/i\3333333333' test.txt

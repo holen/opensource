@@ -1,0 +1,41 @@
+perf 是一个调查 Linux 中各种性能问题的有力工具。
+
+NAME
+
+    perf - Performance analysis tools for Linux
+
+SYNOPSIS
+
+    perf [--version] [--help] COMMAND [ARGS]
+
+perf 包含了：perf-stat (perf stat), perf-top (perf top), perf-record (perf record), perf-list (perf list)
+
+perf list 
+
+    perf list [hw|sw|cache|tracepoint|pmu|event_glob]
+    主要是用于列出有哪些可用的event，可以供 perf top -e eventname 来分析
+
+perf top
+
+    类似top的全局监控工具, 
+
+perf top -e event
+
+    上面的 perf list [hw|sw...] 可以知道所有的 tracepoint events, 接下来我们就可以使用 perf top -e tracepoint-event 来专门获得指定的tracepoint的信息
+    1）perf top -e cpu-clock: 查看CPU的使用
+    2）perf top -e faults: 查看 page faults
+    3）perf top -e block:block_rq_issue: 查看系统IO的请求，比如可以在发现系统IO异常时，可以使用该命令进行调查，就能指定到底是什么原因导致的IO异常。 block_rq_issue 表示 block_request_issue 就是IO请求数。
+
+perf stat
+
+    对某个程序或者特定进程进行监控
+    perf stat可以直接接上命令或者通过pid形式对进程进行性能统计，完成后会打印出这个过程的性能数据统计
+    eg: perf stat -B dd if=/dev/zero of=/dev/null count=1000000	// perf stat command
+    eg: perf stat -p 18669	// perf stat -p pid
+
+perf record & perf report
+
+    先记录再通过详细报告的形式打印事件信息
+    perf record -g -- ./cpu 	//记录CPU
+    perf record -g -- ./io 10	//记录IO
+    perf report			//查看报告

@@ -1,0 +1,2 @@
+下载ftp目录
+wget ftp://hmu105217.my3w.com/htdocs --ftp-user=hmu105217 --ftp-password=cpj5097199 -r

@@ -1,0 +1,27 @@
+# 显示当前分支
+git branch
+# 新建一个2.21分支
+git checkout -b 2.21 origin/2.21
+git checkout -b 2.21
+git branch
+# 拉取2.21分支
+git pull origin 2.21
+# 回退到HEAD版本
+git reset --hard HEAD
+# 拉取所有远程分支的代码到本地
+git fetch --all
+# 把当前分支替换成某个分支的代码
+git reset --hard origin/2.21
+git pull origin 2.21
+
+# 关闭git pull产生的merge 信息
+git config --global core.mergeoptions --no-edit
+
+# git log tree
+git log --oneline --decorate --graph --all
+
+# show diff
+git log -p filename
+
+# 查看文件的相关提交记录
+git log -- filename
