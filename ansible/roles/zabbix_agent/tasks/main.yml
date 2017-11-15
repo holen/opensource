@@ -19,3 +19,5 @@
   template: src=zabbix_agentd.conf.j2 dest=/usr/local/zabbix/etc/zabbix_agentd.conf
 - name: Start zabbix
   command: /usr/local/zabbix/sbin/zabbix_agentd
+- name: Zabbix startup
+  shell: echo -e "\n# Zabbix Agent\n/usr/local/zabbix/sbin/zabbix_agentd\n" >> /etc/rc.d/rc.local
