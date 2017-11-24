@@ -11,3 +11,32 @@ ps -aux | sort -rnk 4 | head -20
 
 # 找出当前系统CPU使用量较高的进程
 ps -aux | sort -rnk 3 | head -20
+
+# 查看程序占用内存与CPU情况
+ps -A --sort -rss -o comm,pmem,pcpu | grep php-fpm | awk '{a+=$2;b+=$3} END {print $1, a, b}'
+
+COMMAND         %MEM %CPU
+mysqld           5.8 22.5
+java             0.9  0.5
+nginx            0.6  0.1
+nginx            0.6  0.0
+nginx            0.6  0.1
+nginx            0.6  0.0
+php-fpm          0.6  0.6
+php-fpm          0.6  0.4
+php-fpm          0.6  0.6
+php-fpm          0.6  0.2
+
+# 查看程序占用内存情况 (查看CPU的话，就把$2改为$3)
+ps -A --sort -rss -o comm,pmem,pcpu | awk '{sum[$1] += $2} END {for(i in sum){print i, sum[i]}}' | sort -rnk 2 | head -n 20
+
+COMMAND %MEM
+php-fpm 74.9
+mysqld 6
+nginx 2.5
+
+# 查看PHP-FPM在你的机器上的平均内存占用：
+ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"M") }'
+
+# 查看每个FPM的内存占用：
+ps -ylC php-fpm --sort:rss

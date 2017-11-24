@@ -1,0 +1,23 @@
+# 查看一个php-cgi占用多少内存
+pmap $(pgrep php-cgi |head -1)
+
+# 显示扩展格式,输出信息更详细
+pmap -x 22760 
+
+扩展和设备格式区域
+
+    Address: 内存开始地址
+    Kbytes: 占用内存的字节数（KB）
+    RSS: 保留内存的字节数（KB）
+    Dirty: 脏页的字节数（包括共享和私有的）（KB）
+    Mode: 内存的权限：read、write、execute、shared、private (写时复制)
+    Mapping: 占用内存的文件、或[anon]（分配的内存）、或[stack]（堆栈）
+    Offset: 文件偏移
+    Device: 设备名 (major:minor)
+
+# 显示进程模块占用内存前20个
+pmap -x -p 30636 | sort -rnk 3 | head -n 20
+
+# -d   device         Show the device format.   显示设备格式
+pmap -d -p 30636 | sort -rnk 3 | head -n 20
+

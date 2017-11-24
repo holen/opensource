@@ -25,3 +25,6 @@ git log -p filename
 
 # 查看文件的相关提交记录
 git log -- filename
+
+# 如果pull出现.git/MERGE_MSG,用--no-edit可以自动merge提交message,这就不用手动写message
+git pull --no-edit origin 2.25

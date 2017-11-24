@@ -1,0 +1,44 @@
+- name: Install basic package 
+  yum:
+    name: wget ntp lrzsz vim-enhanced sysstat gcc gcc-c++ gcc-g77 make automake autoconf glibc glibc-devel glib2 glib2-devel iptables-services
+    state: present
+- name: Install monitor package
+  yum:
+    name: net-tools rsync git screen strace ltrace psmisc lsof iptraf nload iftop iotop dstat perf
+    state: present
+- name: set timezone
+  timezone:
+    name: Asia/Shanghai
+- name: sync time
+  command: /usr/sbin/ntpdate ntp.api.bz
+- name: save time
+  command: /usr/sbin/hwclock -w
+- name: crontab 
+  cron:
+    name: update time
+    minute: 15
+    hour: 2
+    user: root
+    job: /usr/sbin/ntpdate pool.ntp.org >/dev/null 2>&1;/usr/sbin/hwclock -w > /dev/null 2>&1
+- name: add key 
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', 'id_rsa.pub') }}"
+- name: kernel args
+  copy:
+    src: sysctl.conf
+    dest: /etc/sysctl.conf
+    mode: 644
+- name: sysctl -p
+  command: sysctl -p
+- name: se limit
+  copy:
+    src: limits.conf
+    dest: /etc/security/limits.conf
+    mode: 600
+- name: selinux disable
+  selinux:
+    state: disabled
+- name: shell
+  script: sys_env.sh
