@@ -1,0 +1,12 @@
+subversion:
+    container_name: svnserver
+    image: jocor87/svn-ifsvnadmin
+    ports:
+       - 50001:80
+    volumes:
+       - /data/svn/data:/home/ubuntu/svndata/
+       - /data/svn/svnadmin/data:/var/www/html/svnadmin/data/
+       - /data/svn/conf:/etc/apache2/conf/
+    mem_limit: 1024m 
+    ulimits:
+        nproc: 65535

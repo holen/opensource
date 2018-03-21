@@ -1,0 +1,1 @@
+1. mysqlbinlog --start-datetime="2018-02-12 14:00:00" --base64-output=decode-rows -v mysql-bin.000012 | less 
