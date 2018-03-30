@@ -6,6 +6,7 @@ Install X-Pack into Elasticsearch
 
 vim elasticsearch.yml
 
+    # 如果关闭自己创建index，刚需加上如下index
     action.auto_create_index: .security,.monitoring*,.watches,.triggered_watches,.watcher-history*
 
 Start Elasticsearch
@@ -29,6 +30,8 @@ Log in as the built-in elastic user with the password changeme.
 ##[Getting Started with Security](https://www.elastic.co/guide/en/x-pack/current/security-getting-started.html)
 Change the passwords of the built in kibana and elastic users:
 
+    ./bin/x-pack/setup-passwords interactive # 新版本使用这个建立用户名与密码
+
     curl -XPUT -u elastic 'localhost:9200/_xpack/security/user/elastic/_password' -d '{
       "password" : "elasticpassword"
     }'
@@ -36,6 +39,11 @@ Change the passwords of the built in kibana and elastic users:
     curl -XPUT -u elastic 'localhost:9200/_xpack/security/user/kibana/_password' -d '{
       "password" : "kibanapassword"
     }'
+
+List Role
+
+    GET /_xpack/security/role
+    GET /_xpack/security/role/clicks_admin
 
  Set up roles and users to control access to Elasticsearch and Kibana. For example, to grant John Doe full access to all indices that match the pattern events* and enable him to create visualizations and dashboards for those indices in Kibana, you could create an events_admin role and and assign the role to a new johndoe user.
 

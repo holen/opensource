@@ -1,0 +1,40 @@
+# ref: https://www.elastic.co/guide/en/beats/filebeat/master/filebeat-template.html#load-template-manually
+# ref: https://www.elastic.co/guide/en/beats/filebeat/master/configuration-template.html
+# ref: http://yjph83.iteye.com/blog/2392240
+# ref: https://cloud.tencent.com/developer/article/1006051
+# ref: https://www.elastic.co/guide/en/beats/filebeat/current/_examples_of_multiline_configuration.html
+
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/app.log
+  tail_files: true
+  document_type: beta_runtime_log
+  exclude_lines: ["^$_COOKIE", "^$_SESSION", "^$_SERVER", "warning"]
+  multiline:
+    pattern: \[error\]
+    negate: true
+    what: "previous"
+    charset: "utf8"
+    match: after
+    max_lines: 30
+    flush_pattern: $_COOKIE
+output.elasticsearch:
+  hosts: ["127.0.0.1:9200"]
+  username: "elastic"
+  password: "wahaha"
+  index: "beta-log-%{+YYYY.MM.dd}"
+setup.template.enabled: true
+setup.template.name: "beta-log-%{+yyyy.MM.dd}"
+setup.template.pattern: "beta-log-*"
+setup.template.path: "${path.config}/filebeat.template.json"
+setup.template.overwrite: false
+setup.template.settings:
+  index.number_of_shards: 1
+  index.number_of_replicas: 1
+  index.ttl.interval: 3d
+setup.kibana:
+  host: "127.0.0.1:5601"
+  username: "kibana" 
+  password: "wahaha"

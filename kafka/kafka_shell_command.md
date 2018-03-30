@@ -181,3 +181,29 @@ kafka-console-consumer.sh --zookeeper localhost:2181 \
                                       --consumer.config consumer.properties
 
 
+验证消息生产成功
+bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092,localhost:9093,localhost:9094 --topic test --time -1
+注： --time 的值 -1代表最大值， -2代表最小值
+
+创建一个console consumer group
+
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092,localhost:9093,localhost:9094 --topic test --from-beginning --new-consumer
+
+获取该consumer group的group id(后面需要根据该id查询它的位移信息)
+
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092,localhost:9093,localhost:9094 --list --new-consumer
+
+查看当前group的消费情况
+
+./kafka-consumer-groups.sh -bootstrap-server localhost:9092 --describe --group test
+
+# 获取指定consumer group的位移信息 
+bin/kafka-simple-consumer-shell.sh --topic __consumer_offsets --partition 11 --broker-list localhost:9092,localhost:9093,localhost:9094 --formatter "kafka.coordinator.group.GroupMetadataManager\$OffsetsMessageFormatter"
+
+[test,test,0]::[OffsetMetadata[176955,NO_METADATA],CommitTime 1522069325297,ExpirationTime 1522155725297]
+[test,test,0]::[OffsetMetadata[176955,NO_METADATA],CommitTime 1522069326298,ExpirationTime 1522155726298]
+[test,test,0]::[OffsetMetadata[176955,NO_METADATA],CommitTime 1522069327299,ExpirationTime 1522155727299]
+上图可见，该consumer group果然保存在分区11上，且位移信息都是对的(这里的位移信息是已消费的位移，严格来说不是第3步中的位移。由于我的consumer已经消费完了所有的消息，所以这里的位移与第3步中的位移相同)。另外，可以看到__consumer_offsets topic的每一日志项的格式都是：[Group, Topic, Partition]::[OffsetMetadata[Offset, Metadata], CommitTime, ExpirationTime]
+
+
+# ref https://www.jianshu.com/p/5aa8776868bb
