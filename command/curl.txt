@@ -1,3 +1,6 @@
+# htpasswd
+curl -u admin:ExSirN8UMiTRGcvUyj http://aug1ixddadm.qianbitou-beta.cn/status
+
 # POST data
 curl -L -k -i -X POST -d "supertoken=2e906e&card=421023196166650" https://creditapitest.qianbitou.cn/index.php?r=credit/credit/child-order
 
