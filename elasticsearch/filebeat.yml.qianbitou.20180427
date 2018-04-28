@@ -1,0 +1,35 @@
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /data/web/gaea.qianbitou.cn/frontend/runtime/logs/app.log
+    - /data/web/gaea.qianbitou.cn/backend/runtime/logs/app.log
+  tail_files: true
+  document_type: prod_210_runtime_log
+  exclude_lines: ['\$_POST', '\$_COOKIE', '\$_SESSION', '\$_SERVER', '\$_FILES', "warning"]
+  multiline:
+    pattern: \[error\]
+    negate: true
+    charset: "utf8"
+    match: after
+    flush_pattern: ^\]
+    # max_lines: 50
+    # what: "previous"
+output.elasticsearch:
+  hosts: ["10.30.4.130:9200"]
+  username: "elastic"
+  password: "qianbitou2018"
+  index: "prod-log-%{+YYYY.MM.dd}"
+setup.template.enabled: true
+setup.template.name: "prod-log-%{+yyyy.MM.dd}"
+setup.template.pattern: "prod-log-*"
+setup.template.path: "${path.config}/filebeat.template.json"
+setup.template.overwrite: false
+setup.template.settings:
+  index.number_of_shards: 1
+  index.number_of_replicas: 1
+  # index.ttl.interval: 3d
+setup.kibana:
+  host: "10.30.4.130:5601"
+  username: "kibana" 
+  password: "qianbitou2018"

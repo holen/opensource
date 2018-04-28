@@ -28,4 +28,5 @@ show version
 
 Enabling shell autocompletion
 
+    yum install bash-completion
     echo "source <(kubectl completion bash)" >> ~/.bashrc
