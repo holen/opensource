@@ -1,0 +1,5 @@
+cat /etc/sudoers.d/cloud-init 
+ec2-user ALL = NOPASSWD: ALL
+
+# User rules for ec2-user
+ec2-user ALL=(ALL) NOPASSWD:ALL

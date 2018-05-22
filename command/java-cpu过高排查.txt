@@ -1,0 +1,19 @@
+# java进程 cpu load 过高分析处理
+1. jps -v列出所有的java进程，top找出CPU占用过高的应用的java进程pid
+2. 使用Top -H -p PID 命令查看对应进程里的哪个线程占用CPU过高，取该线程pid
+3. 将线程的pid转成16进制 
+4. jstack [进程pid] | grep -A 100 [线程pid的16进制] 
+dump出jvm该线程的后100行，或者输出到某个文件
+jstack -l pid > xxx.file
+
+# java path
+JAVA_HOME=/home/jdk1.8.0_141
+JRE_HOME=$JAVA_HOME/jre
+PATH=$PATH:$JAVA_HOME/bin
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export JAVA_HOME
+export JRE_HOME
+export PATH
+export CLASSPATH
+
+
