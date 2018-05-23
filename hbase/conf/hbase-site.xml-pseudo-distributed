@@ -21,7 +21,7 @@
  */
 -->
 <configuration>
-    
+
     <property>
       <name>hbase.cluster.distributed</name>
       <value>true</value>
@@ -33,20 +33,8 @@
     <property>
         <name>hbase.unsafe.stream.capability.enforce</name>
         <value>true</value>
-        <description>
-          Controls whether HBase will check for stream capabilities (hflush/hsync).
-    
-          Disable this if you intend to run on LocalFileSystem, denoted by a rootdir
-          with the 'file://' scheme, but be mindful of the NOTE below.
-    
-          WARNING: Setting this to false blinds you to potential data loss and
-          inconsistent system state in the event of process and/or node failures. If
-          HBase is complaining of an inability to use hsync or hflush it's most
-          likely not a false positive.
-        </description>
     </property>
 
-	<!-- Zookeeper setting -->
     <property>
       <name>hbase.zookeeper.quorum</name>
       <value>192.168.120.202</value>
@@ -60,18 +48,51 @@
         <value>90000</value>
     </property>
 
-	<!-- Enable HBase Authorization -->
-	<property>
-         <name>hbase.security.authorization</name>
-         <value>true</value>
+    <property>
+      <name>hbase.lease.recovery.dfs.timeout</name>
+      <value>23000</value>
+      <description>How much time we allow elapse between calls to recover lease.
+      Should be larger than the dfs timeout.</description>
     </property>
     <property>
-         <name>hbase.coprocessor.master.classes</name>
-         <value>org.apache.hadoop.hbase.security.access.AccessController</value>
+      <name>dfs.client.socket-timeout</name>
+      <value>10000</value>
+      <description>Down the DFS timeout from 60 to 10 seconds.</description>
     </property>
     <property>
-         <name>hbase.coprocessor.region.classes</name>
-         <value>org.apache.hadoop.hbase.security.token.TokenProvider,org.apache.hadoop.hbase.security.access.AccessController</value>
+      <name>dfs.client.socket-timeout</name>
+      <value>10000</value>
+      <description>Down the DFS timeout from 60 to 10 seconds.</description>
+    </property>
+    <property>
+      <name>dfs.datanode.socket.write.timeout</name>
+      <value>10000</value>
+      <description>Down the DFS timeout from 8 * 60 to 10 seconds.</description>
+    </property>
+    <property>
+      <name>ipc.client.connect.timeout</name>
+      <value>3000</value>
+      <description>Down from 60 seconds to 3.</description>
+    </property>
+    <property>
+      <name>ipc.client.connect.max.retries.on.timeouts</name>
+      <value>2</value>
+      <description>Down from 45 seconds to 3 (2 == 3 retries).</description>
+    </property>
+    <property>
+      <name>dfs.namenode.avoid.read.stale.datanode</name>
+      <value>true</value>
+      <description>Enable stale state in hdfs</description>
+    </property>
+    <property>
+      <name>dfs.namenode.stale.datanode.interval</name>
+      <value>20000</value>
+      <description>Down from default 30 seconds</description>
+    </property>
+    <property>
+      <name>dfs.namenode.avoid.write.stale.datanode</name>
+      <value>true</value>
+      <description>Enable stale state in hdfs</description>
     </property>
 
 </configuration>
