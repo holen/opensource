@@ -1,4 +1,7 @@
 # Install CDH on Centos 7.4
+Ref: https://www.cloudera.com/documentation/enterprise/latest/topics/installation_installation.html#concept_qpf_2d2_2p
+     https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_install_path_b.html#cmig_topic_6_6_3
+
 ## Before you again  
 Install Python 2.6/2.7 and psycopg2 for Hue
 
@@ -34,7 +37,8 @@ Install the JDK from a repository
 
     yum install oracle-j2sdk1.7
 
-Edit /etc/profile
+Edit /etc/profile  
+https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_jdk_installation.html#topic_29_1
 
     JAVA_HOME=/usr/java/default
     JRE_HOME=$JAVA_HOME/jre
@@ -102,6 +106,7 @@ Start the Agents by running the following command on all hosts:
 
 # Configuring Sqoop 2 to Use PostgreSQL instead of Apache Derby
 Ref: https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_sqoop2_configure.html  
+     https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_extrnl_pstgrs.html#cmig_topic_5_6
 
 Install postgresql and initdb
 
