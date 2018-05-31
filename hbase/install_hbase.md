@@ -107,3 +107,38 @@ Exit the HBase Shell.
 
     To exit the HBase Shell and disconnect from your cluster, use the quit command. HBase is still running in the background.
 
+Server-side Configuration for Simple User Access Operation  
+
+Add the following to the hbase-site.xml file on every server machine in the cluster:
+
+    <property>
+      <name>hbase.security.authentication</name>
+      <value>simple</value>
+    </property>
+    <property>
+      <name>hbase.security.authorization</name>
+      <value>true</value>
+    </property>
+    <property>
+      <name>hbase.coprocessor.master.classes</name>
+      <value>org.apache.hadoop.hbase.security.access.AccessController</value>
+    </property>
+    <property>
+      <name>hbase.coprocessor.region.classes</name>
+      <value>org.apache.hadoop.hbase.security.access.AccessController</value>
+    </property>
+    <property>
+      <name>hbase.coprocessor.regionserver.classes</name>
+      <value>org.apache.hadoop.hbase.security.access.AccessController</value>
+    </property>
+
+Client-side Configuration for Simple User Access Operation
+
+Add the following to the hbase-site.xml file on every client:
+
+	<property>
+	  <name>hbase.security.authentication</name>
+	  <value>simple</value>
+	</property>
+
+
