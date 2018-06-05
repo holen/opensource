@@ -185,4 +185,7 @@ Ensuring that the expected software releases are installed on hosts.
     启动 Oozie
     启动 Hue
 
+Managing CDH Using the Command Line
 
+    hbase/hbase.sh ["regionserver","start"]
+    hbase/hbase.sh ["master","start"]
