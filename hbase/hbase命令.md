@@ -1,4 +1,5 @@
 # HBase 命令
+Ref: https://www.cnblogs.com/ajianbeyourself/p/7790044.html
 
 通用命令
 
@@ -12,6 +13,8 @@
 这些是关于HBase在表中操作的命令。
 
     create: 创建一个表。
+        create '<table name>','<column family>'
+        ef: create 'test', 'cf'
     list: 列出HBase的所有表。
     disable: 禁用表。
     is_disabled: 验证表是否被禁用。
@@ -27,6 +30,9 @@
 数据操纵语言
 
     put: 把指定列在指定的行中单元格的值在一个特定的表。
+        eg:     put 'test', 'r1', 'cf:name', 'abc'
+                put 'test', 'r1', 'cf:age', '20'
+                put 'test', 'r2', 'cf:name', 'aaa'
     get: 取行或单元格的内容。
     delete: 删除表中的单元格值。
     deleteall: 删除给定行的所有单元格。

@@ -1,0 +1,82 @@
+检查项: 系统crontab权限设置
+加固建议: 依次执行：
+rm -f /etc/cron.deny 
+rm -f /etc/at.deny 
+touch /etc/cron.allow 
+touch /etc/at.allow 
+chmod 0600 /etc/cron.allow 
+chmod 0600 /etc/at.allow
+检查项: 禁止转发ICMP重定向报文
+加固建议: 首先执行：sysctl -w net.ipv4.conf.all.send_redirects=0（执行结果可利用sysctl net.ipv4.conf.all.send_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv4.conf.all.send_redirects=0，不存在则添加
+检查项: 禁止转发ICMP重定向报文
+加固建议: 首先执行：sysctl -w net.ipv4.conf.default.send_redirects=0（执行结果可利用sysctl net.ipv4.conf.default.send_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv4.conf.default.send_redirects=0，不存在则添加
+检查项: 禁止包含源路由的ip包
+加固建议: 首先执行：sysctl -w net.ipv4.conf.all.accept_redirects=0（执行结果可利用sysctl net.ipv4.conf.all.accept_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv4.conf.all.accept_redirects=0，不存在则添加
+检查项: 禁止包含源路由的ip包
+加固建议: 首先执行：sysctl -w net.ipv4.conf.default.accept_redirects=0（执行结果可利用sysctl net.ipv4.conf.default.accept_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv4.conf.default.accept_redirects=0，不存在则添加
+检查项: 禁止转发安全ICMP重定向报文
+加固建议: 首先执行：sysctl -w net.ipv4.conf.all.secure_redirects=0（执行结果可利用sysctl net.ipv4.conf.all.secure_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv4.conf.all.secure_redirects=0，不存在则添加
+检查项: 禁止转发安全ICMP重定向报文
+加固建议: 首先执行：sysctl -w net.ipv4.conf.default.secure_redirects=0（执行结果可利用sysctl net.ipv4.conf.default.secure_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv4.conf.default.secure_redirects=0，不存在则添加
+检查项: 禁止ipv6路由广播
+加固建议: 首先执行：sysctl -w net.ipv6.conf.all.accept_ra=0（执行结果可利用sysctl net.ipv6.conf.all.accept_ra查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv6.conf.all.accept_ra=0，不存在则添加
+检查项: 禁止ipv6路由广播
+加固建议: 首先执行：sysctl -w net.ipv6.conf.default.accept_ra=0（执行结果可利用sysctl net.ipv6.conf.default.accept_ra查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv6.conf.default.accept_ra=0，不存在则添加
+检查项: 禁止ipv6路由重定向
+加固建议: 首先执行：sysctl -w net.ipv6.conf.all.accept_redirects=0（执行结果可利用sysctl net.ipv6.conf.all.accept_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv6.conf.all.accept_redirects=0，不存在则添加
+检查项: 禁止ipv6路由重定向
+加固建议: 首先执行：sysctl -w net.ipv6.conf.default.accept_redirects=0（执行结果可利用sysctl net.ipv6.conf.default.accept_redirects查看值是否为0）,再查看/etc/sysctl.conf中是否存在net.ipv6.conf.default.accept_redirects=0，不存在则添加
+检查项: 密码授权新密码与老密码不能重复
+加固建议: 在/etc/pam.d/password-auth中添加：password sufficient pam_unix.so remember=3 ,remember的值表示此次设置密码与过去3次不同
+检查项: 系统授权新密码与老密码不能重复
+加固建议: 在/etc/pam.d/system-auth中添加：password sufficient pam_unix.so remember=3 ,remember的值表示此次设置密码与过去3次不同
+检查项: rsyslog日志文件权限配置
+加固建议: 在/etc/rsyslog.conf中添加：$FileCreateMode 0640
+检查项: 禁止root直接登录
+加固建议: 注意：在修改此项之前，请务必创建一个可登陆账号；在/etc/ssh/sshd_config中PermitRootLogin的值：yes设置为no
+检查项: 默认登录端口检测
+加固建议: 在/etc/ssh/sshd_config中取消Port 22注释符号#，并修改22为其它值
+检查项: SSHD仅记录ssh用户登录活动
+加固建议: 在/etc/ssh/sshd_config中取消LogLevel INFO注释符号#
+检查项: SSHD仅记录ssh用户登录活动
+加固建议: 在/etc/ssh/sshd_config中取消MaxAuthTries注释符号#，设置自定义最大密码尝试失败次数
+检查项: 清理主机远程登录历史主机记录
+加固建议: 在/etc/ssh/sshd_config中取消IgnoreRhosts yes注释符号#
+检查项: 禁止主机认证登录
+加固建议: 在/etc/ssh/sshd_config中取消HostbasedAuthentication no注释符号#
+检查项: 禁止空密码用户登录
+加固建议: 在/etc/ssh/sshd_config中取消PermitEmptyPasswords no注释符号#
+检查项: 禁止用户修改环境变量
+加固建议: 在/etc/ssh/sshd_config中取消PermitUserEnvironment no注释符号#
+检查项: 设置输入密码间隔时间
+加固建议: 在/etc/ssh/sshd_config中取消LoginGraceTime前注释符，同时设置输入密码时间间隔秒数
+检查项: 设置用户密码最小长度
+加固建议: 在/etc/security/pwquality.conf中取消minlen注释符号#，同时设置最小密码长度建议10位以上
+检查项: 设置用户密码数字位数
+加固建议: 在/etc/security/pwquality.conf中取消dcredit注释符号#，同时设置为负数建议-1最少包含1位数字
+检查项: 设置用户密码大写字母位数
+加固建议: 在/etc/security/pwquality.conf中取消ucredit注释符号#，同时设置为负数建议-1最少包含1位大写字母
+检查项: 设置用户密码小写字母位数
+加固建议: 在/etc/security/pwquality.conf中取消lcredit注释符号#，同时设置为负数建议-1最少包含1位小写字母
+检查项: 设置用户密码特殊字符位数
+加固建议: 在/etc/security/pwquality.conf中取消ocredit注释符号#，同时设置为负数建议-1最少包含1位特殊字符
+检查项: 强制密码失效时间
+加固建议: 在/etc/login.defs 设置强制密码失效时间，建议值365
+检查项: 密码修改最小间隔时间
+加固建议: 在/etc/login.defs 设置密码修改最小间隔时间，建议值7
+检查项: 设置有密码账户不活动最大时间
+加固建议: 使用如下命令设置有密码账户不活动最大时间值：useradd -D -f 1095，建议值1095天
+检查项: 检查/boot/grub2/grub.cfg文件ACL属性
+加固建议: 执行：chmod 0600 /boot/grub2/grub.cfg
+检查项: 检查/etc/crontab文件ACL属性
+加固建议: 执行：chmod 0600 /etc/crontab
+检查项: 检查/etc/cron.hourly文件ACL属性
+加固建议: 执行：chmod 0600 /etc/cron.hourly
+检查项: 检查/etc/cron.daily文件ACL属性
+加固建议: 执行：chmod 0600 /etc/cron.daily
+检查项: 检查/etc/cron.weekly 文件ACL属性
+加固建议: 执行：chmod 0600 /etc/cron.weekly
+检查项: 检查/etc/cron.monthly 文件ACL属性
+加固建议: 执行：chmod 0600 /etc/cron.monthly
+检查项: 检查/etc/cron.d 文件ACL属性
+加固建议: 执行：chmod 0600 /etc/cron.d
