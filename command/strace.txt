@@ -63,3 +63,11 @@ strace -o /tmp/strace.log -f -p $PID
     -c 实时统计每个系统调用的耗时
     -T 打印每个系统调用的耗时
 
+
+strace -cp $(pgrep -n nginx)
+top
+strace -T -ttp $(pgrep -n nginx) 2&>1 |grep -B 10 close > close.log
+lsof | more
+strace -cp $(pgrep -n php-fpm)
+strace -T -ttp $(pgrep -n php-fpm) 2&>1 | grep -B 10 access > access.log
+strace -T -ttp $(pgrep -n php-fpm) 2&>1 | grep -B 10 recvfrom > access.log
