@@ -1,3 +1,9 @@
+# 查看PHP-FPM在你的机器上的平均内存占用：
+ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"M") }'
+
+# 查看每个FPM的内存占用：
+ps -ylC php-fpm --sort:rss
+
 # 查看httpd进程使用了多少内存
 ps aux | grep 'nginx' | awk '{print $6/1024 " MB";}'
 
@@ -35,8 +41,3 @@ php-fpm 74.9
 mysqld 6
 nginx 2.5
 
-# 查看PHP-FPM在你的机器上的平均内存占用：
-ps --no-headers -o "rss,cmd" -C php-fpm | awk '{ sum+=$1 } END { printf ("%d%s\n", sum/NR/1024,"M") }'
-
-# 查看每个FPM的内存占用：
-ps -ylC php-fpm --sort:rss
