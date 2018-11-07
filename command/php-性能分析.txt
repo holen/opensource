@@ -1,0 +1,65 @@
+关注点
+    延时/响应时间 
+    吞吐率 RPM(Request Per Minute) QPS
+    错误率/失败率
+
+压测：
+    ab -n 300 -c 20 http://www.test.com/index.html 
+
+性能分析
+    系统负载：  top
+
+    系统调用分析：
+        strace -p <PID> -T
+        strace -p <P工D> -c 
+
+    PHP 运行状态:
+        php access log: 
+            access.log = log/access_$pool.log
+            access.format = "[%{%Y-%m-%d:%H:%M:%S}t] %{REMOTE_ADDR}e \"%m %r%Q%q\" %s %p %f %{seconds}ds %{megabytes}M %{user}C%% %{system}C%% %{total}C%%"
+        php slow log:
+            slowlog = log/$pool.log.slow
+            request_slowlog_timeout = 3
+        php-fpm status:
+            https://xrt6otyhadm.qianbitou.cn/status
+            https://xrt6otyhadm.qianbitou.cn/status?full
+
+    内部运行状态分析，代码级性能
+         xhprof分析 PHP 代码级性能 
+         xdebug
+         yii-debug
+
+    外部存储性能分析
+        Mysql:
+            show processlist;
+            explain;
+            show profile;
+            show status/show global status ;
+            show varaibles ;
+            slow log
+        redis:
+            info
+            monitor
+
+
+PHP 故障分类及处理思路
+502 错误：
+    打开页面显示的是 502 bad gateway （错误网关）的信息。 原因一般是 PHP 执行得太久而超过了参数 request_terminate_ timeout 和 max_execution_ time 所设定的 时间，导致 FPM 终止了 PHP 工作进程，无法为 fastcgi 接口返回信息。 如果 PHP 的 错误日志里出现了 SIGxxxx，那就有可能会出现这个现象。 而罪魁祸首很可能是后端 存储或调用外部连接反应太慢，或者挂了，导致 PHP 一直等待，达到了自行了断的 条件。 
+502 错误的一般处理方法：
+    如果是执行超时时间配置不合理，则需要延长超时时间。 另一种处理方法是从后端入手，找到关键的瓶颈点，比如分析数据库的慢查询、死 锁、负载，执行中的 SQL 等， strace 是个发现 PHP 连接后端超时的好方法。 
+503 错误：
+    伴随 503 错误出现的描述一般是整个服务临时不可用（ Service temply Unavailable），这种错误一般是 Web 服务器（如 Nginx）这一层端口还活着，但无法响 应用户的请求。 
+503 错误的一般处理方法：
+    应该重点分析机器负载， Nginx 进程是否存活，端口是否 存活， Nginx 进程的工作饱和度，如果以上都正常则应该参照 7.4 节所讲的方法分析 Nginx 状态。
+504 错误： 
+    504 错误表示网关超时（ gateway timeout），可能是请求量突发，导致 PHP 负载太高，无法为请求分配工作进程，或者达到了连接数限制、某些组件达到性能 瓶颈了，导致系统可用性明显下降；影响504 错误的是 Nginx 的超时设置 fastcgi_connect_timeout、 fastcgi_send_ timeout、 fastcgi_read_timeout。 
+504 错误的一般处理方法：
+    还是要从 PHP 层进行分析，如果每个请求的处理时间都 是正常的，那么就是整个 PHP 层的资源不够用了，需要扩容；如果是某些请求的时 间太长，那么就得找到性能瓶颈点了。 
+404 错误： 
+    表示页面不存在，静态页面或 PHP 文件被删除。 日常正常运行的网站如果突然变得卡顿，那么出现的故障大部分是性能问题造成的，往 往是到了高峰期用户大量涌进网站，导致某些组件达到性能瓶颈
+由 PHP 的性能问题所引起 的故障比较常见的有如下几种。 
+    PHP 进程不存在：可能由于进程意外掉挂了，再没有起来，比较常见的是请求一直在 处理中，达到 max execute time 时间， 管理进程把工作进程干掉了。 
+    PHP 进程响应慢， Web 服务器响应慢，达到超时后，返回 503 错误。 
+    PHP 进程本身慢： 这种情况反而不多，只出现在少数特别复杂的框架写的程序中。 
+    PHP 依赖的接口慢：比如请求外部的接口，外部接口很慢等。 
+    PHP 依赖的后端存储慢： 这种情况比较普遍，比如 MysQL、 Redis、 Memcached 出现故障 或性能问题。

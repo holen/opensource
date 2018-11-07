@@ -71,3 +71,5 @@ lsof | more
 strace -cp $(pgrep -n php-fpm)
 strace -T -ttp $(pgrep -n php-fpm) 2&>1 | grep -B 10 access > access.log
 strace -T -ttp $(pgrep -n php-fpm) 2&>1 | grep -B 10 recvfrom > access.log
+
+strace -p <PID> -T 
