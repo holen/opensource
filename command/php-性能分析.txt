@@ -8,6 +8,11 @@
 
 性能分析
     系统负载：  top
+                watch -d uptime
+                # -P ALL 表示监控所有 CPU，后面数字 5 表示间...
+                mpstat mpstat -P ALL 5
+                # 间隔 5 秒后输出一组数据 
+                pidstat -u 5 1
 
     系统调用分析：
         strace -p <PID> -T

@@ -1,0 +1,2 @@
+升级软件包
+    ansible -m yum -a "name=nscd state=latest" hadoop

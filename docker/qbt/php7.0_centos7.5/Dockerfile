@@ -21,7 +21,11 @@ RUN yum install -y epel-release && \
     pam-devel libidn libidn-devel openssl openssl-devel mhash \ 
     mhash-devel mcrypt libmcrypt libmcrypt-devel libssh2 libssh2-devel
 
-ADD $PHP_VERSION.tar.gz /opt/
+ADD http://101.96.10.63/cn2.php.net/distributions/$PHP_VERSION.tar.gz /opt/
+
+RUN cd /opt/ && \
+    tar zxvf $PHP_VERSION.tar.gz && \
+    rm -rf $PHP_VERSION.tar.gz
 
 RUN set -uxe && \
     echo "alias cdp='cd $PHP_PREFIX'" >> /root/.bashrc && \

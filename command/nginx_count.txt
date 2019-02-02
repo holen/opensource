@@ -90,3 +90,9 @@ tcpdump -i eth0 -tnn dst port 80 -c 1000 | awk -F"." '{print $1"."$2"."$3"."$4}'
 
 获取每分钟的请求数量，输出成csv文件，然后用excel打开，可以生成柱状图
 ca /data/logs/access.log  | awk '{print substr($4,14,5)}' | uniq -c | awk '{print $2","$1}' > /tmp/test/access.csv
+
+# 获取每分钟 body_bytes_sent 的总值 
+awk '{print $4, ":"$10}' 1 | awk -F":" '{sum[$3] += $5} END {for(i in sum){print i, sum[i]/1024 "K"}}' | sort -rn 
+
+# 每小时 body_bytes_sent 的统计值
+cat /tmp/1 | awk '{print $4, ":"$10}' | awk -F":" '{sum[$2] += $5} END {for(i in sum){print i, sum[i]/1024/1024 "M"}}' | sort -rn | less

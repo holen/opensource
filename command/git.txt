@@ -28,3 +28,7 @@ git log -- filename
 
 # 如果pull出现.git/MERGE_MSG,用--no-edit可以自动merge提交message,这就不用手动写message
 git pull --no-edit origin 2.25
+
+# git 放弃本地修改 强制更新
+git fetch --all
+git reset --hard origin/master

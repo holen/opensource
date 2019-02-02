@@ -41,3 +41,16 @@ php-fpm 74.9
 mysqld 6
 nginx 2.5
 
+ps -eo size,pid,user,command --sort -size | awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' | grep php-fpm 
+
+
+1. ps -eo ppid,pid,user,stat,pcpu,comm,wchan:32
+This prints a list of all processes where in the last column either a '-' is displayed when the process is running or the name of the kernel function in which the process is sleeping if the process is currently sleeping. This includes also processes which are interruptible. Processes that are in uninterruptible sleep can be determined via the fourth column which would then show a D.
+
+2. echo w > /proc/sysrq-trigger
+This command produces a report and a list of all processes in D state and a full kernel stack trace to /var/log/messages. This shows much more information than the first option described above.
+
+
+# 计算进程真正占用的物理内存，使用 grep 查找 Pss 指标后，再用 awk 计算累加值
+grep Pss /proc/[1-9]*/smaps | awk '{total+=$2}; END {printf "%d kB\n", total }'
+
