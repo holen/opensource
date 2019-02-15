@@ -2,7 +2,7 @@ FROM centos:7.5.1804
 
 ENV PHP_FPM_USER php
 ENV PHP_FPM_GROUP php
-ENV PHP_VERSION php-7.0.26
+ENV PHP_VERSION php-7.0.33
 ENV PHP_PREFIX /usr/local/webserver/php-70
 ENV PATH="$PHP_PREFIX/bin:$PHP_PREFIX/sbin:${PATH}"
 
@@ -10,22 +10,19 @@ RUN id -g $PHP_FPM_GROUP || groupadd $PHP_FPM_GROUP -g 303 && \
     id -u $PHP_FPM_USER || useradd -u 303 -g $PHP_FPM_GROUP -c "Web Server" $PHP_FPM_USER -s /sbin/nologin -M && \
     id -g www || groupadd www -g 302 && \
     id -u www || useradd -u 302 -g www -c "Web Server" www -s /sbin/nologin -M && \
-    cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    cp -rf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
 
 RUN yum install -y epel-release && \ 
     yum install -y gcc zlib-devel \
     libxml2-devel libjpeg-devel libpng-devel \
     freetype-devel curl curl-devel bzip2 bzip2-devel \
-    openldap openldap-devel patch libxml2-devel mysql mysql-devel \
+    openldap openldap-devel patch libxml2-devel mysql-community-client mysql-community-common mysql-community-devel \
     libtiff-devel fontconfig-devel libXpm-devel gettext-devel \
     pam-devel libidn libidn-devel openssl openssl-devel mhash \ 
     mhash-devel mcrypt libmcrypt libmcrypt-devel libssh2 libssh2-devel
 
-ADD http://101.96.10.63/cn2.php.net/distributions/$PHP_VERSION.tar.gz /opt/
-
-RUN cd /opt/ && \
-    tar zxvf $PHP_VERSION.tar.gz && \
-    rm -rf $PHP_VERSION.tar.gz
+ADD $PHP_VERSION.tar.gz /opt/
 
 RUN set -uxe && \
     echo "alias cdp='cd $PHP_PREFIX'" >> /root/.bashrc && \
