@@ -6,7 +6,7 @@ services:
         volumes:
             - "./nginx/conf/php.conf:/usr/local/webserver/nginx/conf/php.conf"
             - "./nginx/conf/vhosts/www.conf:/usr/local/webserver/nginx/conf/vhosts/www.conf"
-            - "./advanced:/data/web/yii2"
+            - yii2-advanced-volume:/data/web/yii2
         ports:
             - "8000:80"
             - "8001:81"
@@ -18,17 +18,11 @@ services:
         image: "qianbitou/php70-fpm:1.1"
         container_name: php
         volumes:
-            - "./advanced:/data/web/yii2"
+            - yii2-advanced-volume:/data/web/yii2
             - "./scripts/run.sh:/root/run.sh"
         ports:
             - "9000:9000"
         restart: always
-    composer:
-        image: "qianbitou/composer"
-        container_name: composer
-        volumes:
-            - "./advanced:/home/www/app"
-        command: update
     mysqldb:
         image: "centos/mysql-56-centos7"
         container_name: mysqldb
@@ -41,3 +35,11 @@ services:
             - MYSQL_PASSWORD=Yii123456
         ports:
             - "3306:3306"
+    composer:
+        image: "qianbitou/composer:yii2-advanced"
+        container_name: composer
+        volumes:
+            - yii2-advanced-volume:/home/www/advanced
+        command: update
+volumes:
+    yii2-advanced-volume:
