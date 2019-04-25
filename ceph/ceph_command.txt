@@ -1,0 +1,81 @@
+# Ceph Command
+
+## ceph-volume
+LIST
+
+This subcommand will list any devices (logical and physical) that may be associated with a Ceph cluster, as long as they contain enough metadata to allow for that discovery.
+
+Output is grouped by the OSD ID associated with the devices, and unlike ceph-disk it does not provide any information for devices that aren’t associated with Ceph.
+
+eg:
+
+	root@ubuntu:/home/holen/my-cluster# ceph-volume lvm list
+
+	====== osd.0 =======
+
+	[block]    /dev/ceph-93a01aa4-6273-40a1-8f86-634dff44b2ce/osd-block-d541a31b-38c1-4562-9b72-c4d90f2cd2fe
+
+      type                      block
+      osd id                    0
+      cluster fsid              502edd91-3e07-4495-b51b-be1841c23c3e
+      cluster name              ceph
+      osd fsid                  d541a31b-38c1-4562-9b72-c4d90f2cd2fe
+      encrypted                 0
+      cephx lockbox secret      
+      block uuid                JYTzC9-I8NF-u2nk-pN3L-jzSd-SjyE-ENzlBs
+      block device              /dev/ceph-93a01aa4-6273-40a1-8f86-634dff44b2ce/osd-block-d541a31b-38c1-4562-9b72-c4d90f2cd2fe
+      vdo                       0
+      crush device class        None
+      devices                   /dev/sdb  
+
+## ceph osd
+显示 osd pool 列表
+
+    ceph osd lspools
+
+查看 osd map,包含集群 fsid 、创建时间、最近修改时间、存储池列表、副本数量、归置组数量、 OSD 列表及其状态（如 up 、 in ）。
+
+    ceph osd dump
+
+查看 pg map,包含归置组版本、其时间戳、最新的 OSD 运行图版本、占满率、以及各归置组详情，像归置组 ID 、 up set 、 acting set 、 PG 状态（如 active+clean ），和各存储池的数据使用情况统计。
+
+    ceph pg dump
+
+## ceph config
+显示 osd 的配置信息
+
+    ceph config show osd.0
+    # show all options (even those with default values)
+    ceph config show-with-defaults osd.0
+    # 查看 某个 配置值 
+    ceph config show osd.0 mon_host
+    # You can also observe settings for a running daemon by connecting to it from the local host via the admin socket.
+    ceph daemon osd.0 config show
+
+## ceph mon
+查看 monitor map, 包含集群的 fsid 、位置、名字、地址和端口，也包括当前版本、创建时间、最近修改时间。
+
+    ceph mon dump
+
+## ceph mds
+查看 mds map,包含当前 MDS 图的版本、创建时间、最近修改时间，还包含了存储元数据的存储池、元数据服务器列表、还有哪些元数据服务器是 up 且 in 的。
+
+    ceph fs dump
+
+查看 mds 状态
+
+    ceph mds stat
+
+## ceph pool
+要查看某存储池的使用统计信息
+
+    rados df
+
+## rbd
+可以用 rbd 命令的 showmapped 选项查看映射为内核模块的块设备映像。
+
+    rbd showmapped
+
+罗列出所有的映像。
+
+    rbd list

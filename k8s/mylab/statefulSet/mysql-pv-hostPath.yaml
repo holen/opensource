@@ -1,0 +1,41 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mysql-pv-1
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/mysql-data/pv-1
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mysql-pv-2
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/mysql-data/pv-2
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mysql-pv-3
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/mysql-data/pv-3

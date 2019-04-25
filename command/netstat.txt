@@ -10,3 +10,16 @@
 
    --statistics , -s
           Display summary statistics for each protocol
+
+查看连接建立情况
+    cat /proc/net/sockstat
+
+    netstat -natp | awk '{print $6}' | sort | uniq -c
+
+查看有没有发生套接字的丢包现象
+
+	[root@slave1 ~]# netstat -s | grep socket
+    31760 TCP sockets finished time wait in fast timer
+    6 delayed acks further delayed because of locked socket
+    1133390 times the listen queue of a socket overflowed
+    1149904 SYNs to LISTEN sockets dropped

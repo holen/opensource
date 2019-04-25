@@ -20,6 +20,9 @@ WORKDIR /home/www/app
 
 USER www
 
+# RUN composer config -g repo.packagist composer https://packagist.phpcomposer.com \
+#     && composer install
+
 CMD ["-"]
 
 ENTRYPOINT ["composer", "--ansi"]

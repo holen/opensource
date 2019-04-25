@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysqldb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysqldb
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD_FILE
+            value: "/opt/mysql_root_passwd"
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+        volumeMounts:
+          - mountPath: /etc/mysql/mysql.conf.d
+            name: mysql-cnf
+            readOnly: true
+          - mountPath: /opt/
+            name: mysql-secret
+            readOnly: true
+      volumes:
+        - name: mysql-cnf
+          configMap:
+              name: mysql-cnf
+              items:
+              - key: mysqld.cnf
+                path: my.cnf
+        - name: mysql-secret
+          secret:
+              secretName: mysql.secret

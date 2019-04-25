@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: extended-resource-demo
+spec:
+  containers:
+  - name: extended-resource-demo-ctr
+    image: nginx
+    resources:
+      requests:
+        alpha.kubernetes.io/nvidia-gpu: 2
+      limits:
+        alpha.kubernetes.io/nvidia-gpu: 2
+

@@ -7,6 +7,7 @@ awk '{print $1}' access.log | sort -n | uniq | wc -l
 查看某一时间段的IP访问量(4-5点)
 
 grep "07/Apr/2017:0[4-5]" access.log | awk '{print $1}' | sort | uniq -c| sort -nr | wc -l  
+fgrep "26/Feb/2019:11" /data/logs/access_gaea.qianbitou.cn.log | awk -F ":" '$3>25' > /tmp/1
 
 查看访问最频繁的前100个IP
 

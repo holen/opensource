@@ -31,6 +31,17 @@ Add the Ceph packages to your repository. Replace {ceph-stable-release} with a s
 Update your repository and install ceph-deploy:
 
     sudo apt-get update && sudo apt-get install ceph-deploy
+
+Create a new user on each Ceph Node.
+
+    ssh user@ceph-server
+    sudo useradd -d /home/{username} -m {username}
+    sudo passwd {username}
+
+For the new user you added to each Ceph node, ensure that the user has sudo privileges.
+
+    echo "{username} ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/{username}
+    sudo chmod 0440 /etc/sudoers.d/{username}
     
 Generate the SSH keys 
 

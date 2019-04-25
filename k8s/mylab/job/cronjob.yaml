@@ -1,0 +1,23 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+  # 配置某个Job还没有执行完, 在新的触发时间来时是否创建新的 job 任务。Allow 表示同时存在，Forbid 表示不能同时存在，Replace 表示新产生的 job 会替换 旧的 job
+  # concurrencyPolicy=Forbid
+  # 200s 内如果 job 创建失败 100次，就停止创建 job 
+  # startingDeadlineSeconds = 200
+

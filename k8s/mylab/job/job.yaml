@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  # 并发数
+  # parallelism: 2
+  # Job 至少要完成的 Pod 数目，Job 的最小完成数
+  # completions: 4
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: resouer/ubuntu-bc
+        command: ["sh", "-c", "echo 'scale=5000; 4*a(1)' | bc -l "]
+      restartPolicy: Never
+  # 限制重试次数
+  backoffLimit: 4
+  # 设置最长运行时间 秒为单位
+  activeDeadlineSeconds: 100
