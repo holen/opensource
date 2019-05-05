@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-configmap
+  {{- /* 使用 _helper.tpl 定义的 template 模板, 使用 . 将范围传递给模板 */}}
+  {{- /* 我们在调用 template 时末尾传递了 . ，我们可以很容易地通过 .Values 或者 .Values.favorite 或者我们想要的任何范围。但是我们想要的是顶级范围。*/}}
+  {{- template "mychart.labels" . }}
+  labels:
+  {{- /* 因为 没有办法将 template 调用的输出传递给其他函数，所以使用 include 代替 template , 将模板的内容导入到当前管道中，并将其传递到管道中的其函数。 */}}
+{{ include "mychart.app" . | indent 4 }}
+data:
+  myvalue: "Hello World"
+  {{- /* 变量赋值 */}}
+  {{- $relname := .Release.Name }}
+  drink: {{.Values.favoriteDrink}}
+  drink: {{.Values.favorite.drink | quote }}
+  food: {{.Values.favorite.food | upper | quote }}
+  {{- range $key, $val := .Values.favorite}}
+  {{$key}}: {{ $val | quote }}
+  {{- end}}
+  {{- /* {{-（添加了破折号和空格）表示应该将格左移，而 -}} 意味着应该删除右空格。注意！换行符也是空格！*/}}
+  {{- if eq .Values.favorite.drink "coffee"}}
+  mug: true
+  {{- end}}
+  {{- /* 使用 with 修改范围, with 可以允许将当前范围（.）设置为特定的对象。*/}}
+  {{- with .Values.favorite}}
+  drink: {{.drink | default "tea" | quote}}
+  food: {{.food | upper | quote}}
+  {{- /* 取变量值 */}}
+  release: {{$relname}}
+  {{- end}}
+  {{- /* YAML 中的 |- 标记表示一个多行字符串。*/}}
+  toppings: |-
+    {{- /* range 遍历! */}}
+    {{- range .Values.pizzaToppings}}
+    - {{. | title | quote}}
+    {{- end}}
+  toppings: |-
+    {{- range $index, $topping := .Values.pizzaToppings}}
+      {{$index}}: {{ $topping }}
+    {{- end}}
+  sizes: |-
+    {{- range tuple "small" "medium" "large"}}
+    - {{.}}
+    {{- end}}
+  {{- /* 导入文件内容 */}}
+  {{- $files := .Files}}
+  {{- range tuple "config1.toml" "config2.toml" "config3.toml"}}
+  {{.}}: |-
+    {{$files.Get . }}
+  {{- end}}
+  {{- /* 读取文件 Global 模式 */}}
+  {{- $root := . -}}
+  {{range $path, $bytes := .Files.Glob "foo/*" }}
+  {{$path}}: '{{ $root.Files.Get $path | b64enc }}'
+  {{- end}}
+  token: |-
+    {{.Files.Get "config1.toml" | b64enc}}
+  some-file.txt: {{range .Files.Lines "foo/bar.txt"}}
+    {{.}}{{ end }}
