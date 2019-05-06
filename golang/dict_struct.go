@@ -1,0 +1,6 @@
+type hmap struct {
+  count int
+  ...
+  buckets unsafe.Pointer  // hash桶地址
+  ...
+}
