@@ -6,7 +6,7 @@ awk '{print $1}' access.log | sort -n | uniq | wc -l
 
 查看某一时间段的IP访问量(4-5点)
 
-grep "07/Apr/2017:0[4-5]" access.log | awk '{print $1}' | sort | uniq -c| sort -nr | wc -l  
+grep "07/Apr/2017:0[4-5]" access.log | awk '{print $1}' | sort | uniq -c| sort -nr | wc -l
 fgrep "26/Feb/2019:11" /data/logs/access_gaea.qianbitou.cn.log | awk -F ":" '$3>25' > /tmp/1
 
 查看访问最频繁的前100个IP
@@ -29,7 +29,7 @@ awk '{print $7}' access.log | sort |uniq -c | sort -rn | head -n 100
 
 查看访问最频的页面([排除php页面】(TOP100)
 
-grep -v ".php"  access.log | awk '{print $7}' | sort |uniq -c | sort -rn | head -n 100 
+grep -v ".php"  access.log | awk '{print $7}' | sort |uniq -c | sort -rn | head -n 100
 
 查看页面访问次数超过100次的页面
 
@@ -92,8 +92,13 @@ tcpdump -i eth0 -tnn dst port 80 -c 1000 | awk -F"." '{print $1"."$2"."$3"."$4}'
 获取每分钟的请求数量，输出成csv文件，然后用excel打开，可以生成柱状图
 ca /data/logs/access.log  | awk '{print substr($4,14,5)}' | uniq -c | awk '{print $2","$1}' > /tmp/test/access.csv
 
-# 获取每分钟 body_bytes_sent 的总值 
-awk '{print $4, ":"$10}' 1 | awk -F":" '{sum[$3] += $5} END {for(i in sum){print i, sum[i]/1024 "K"}}' | sort -rn 
+# 获取每分钟 body_bytes_sent 的总值
+awk '{print $4, ":"$10}' 1 | awk -F":" '{sum[$3] += $5} END {for(i in sum){print i, sum[i]/1024 "K"}}' | sort -rn
 
 # 每小时 body_bytes_sent 的统计值
 cat /tmp/1 | awk '{print $4, ":"$10}' | awk -F":" '{sum[$2] += $5} END {for(i in sum){print i, sum[i]/1024/1024 "M"}}' | sort -rn | less
+
+# 统计平均响应时间
+fgrep /v1/data-orders/refresh /data/logs/access_dataapi.mishishuju.com.log | fgrep 2019:17: | awk -F'"' '{print [2}' | awk 'BEGIN{FS=" ";count=0} {count+=$(NF); print (count/NR),"\t",NR}'']}"
+
+fgrep /v1/data-orders/refresh /data/logs/access_dataapi.mishishuju.com.log | fgrep 2019:17:0[0-9] | awk -F'"' '{print [2}' | awk 'BEGIN{FS=" ";count=0} {count+=$(NF); print (count/NR),"\t",NR}'']}"

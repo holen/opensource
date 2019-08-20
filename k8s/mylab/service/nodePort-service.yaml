@@ -7,13 +7,13 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - nodePort: 30001
+  - nodePort: 31001
     # clusterIP + port 
     port: 8001
     targetPort: 80
     protocol: TCP
     name: http
-  - nodePort: 30443
+  - nodePort: 31443
     port: 8443
     protocol: TCP
     name: https
