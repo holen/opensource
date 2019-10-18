@@ -1,0 +1,53 @@
+GET /
+
+GET /_cat/indices?v
+
+GET /_mapping?pretty=true
+
+PUT /accounts/person/1 
+{
+  "user": "zhang san",
+  "title": "enginer",
+  "desc": "database manage"
+}
+
+PUT /accounts/person/2
+{
+  "user": "zhang long",
+  "title": "test enginer",
+  "desc": "database manage, software enginer"
+}
+
+POST /accounts/person/3
+{
+  "user": "zhang wu",
+  "title": "developer",
+  "desc": "database manage, test enginer"
+}
+
+GET /accounts/person/4?pretty=true
+
+GET /accounts/person/_search
+
+GET /accounts/person/_search
+{
+  "query" : { "match" : { "user" : "zhang san" }}
+}
+
+GET /accounts/person/_search
+{
+  "query" : { "match" : { "user" : "zhang san" }},
+  "size": 1
+}
+
+GET /accounts/person/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "desc": "database" } },
+        { "match": { "desc": "software" } }
+      ]
+    }
+  }
+}

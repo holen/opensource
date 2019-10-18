@@ -76,3 +76,6 @@ strace -p <PID> -T
 
 # 追踪向OS申请内存请求
 strace -f -e "brk,mmap,munmap" -p pid
+
+# 跟踪网络连接
+trace -T -tt -e trace=network -p pid
