@@ -51,3 +51,5 @@ GET /accounts/person/_search
     }
   }
 }
+
+GET /accounts/_mapping/person
